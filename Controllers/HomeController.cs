@@ -1,9 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using HastaneTakipsistemi.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HastaneTakipsistemi.Controllers
 {
+    [Authorize(Roles = "Admin,Doctor,Patient")] // Belirli rollere erişim izni
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

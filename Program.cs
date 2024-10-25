@@ -40,6 +40,9 @@ app.MapControllerRoute(
 app.MapRazorPages();
 
 // Seed methodunu çağır
-ApplicationDbInitializer.Seed(app);
-
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    ApplicationDbInitializer.Seed(services);
+}
 app.Run();

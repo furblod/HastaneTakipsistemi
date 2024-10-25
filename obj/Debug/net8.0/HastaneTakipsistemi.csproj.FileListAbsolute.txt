@@ -254,3 +254,5 @@ C:\Users\furka\Desktop\HastaneTakipsistemi\obj\Debug\net8.0\refint\HastaneTakips
 C:\Users\furka\Desktop\HastaneTakipsistemi\obj\Debug\net8.0\HastaneTakipsistemi.pdb
 C:\Users\furka\Desktop\HastaneTakipsistemi\obj\Debug\net8.0\HastaneTakipsistemi.genruntimeconfig.cache
 C:\Users\furka\Desktop\HastaneTakipsistemi\obj\Debug\net8.0\ref\HastaneTakipsistemi.dll
+C:\Users\furka\Desktop\HastaneTakipsistemi\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\furka\Desktop\HastaneTakipsistemi\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
