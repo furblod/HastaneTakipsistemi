@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace HastaneTakipsistemi.Controllers
 {
-    [Authorize(Roles = "Admin,Doctor,Patient")] // Belirli rollere erişim izni
+    [Authorize(Roles = "Admin,Doctor,Patient")] 
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
