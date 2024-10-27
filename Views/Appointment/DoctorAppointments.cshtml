@@ -1,0 +1,34 @@
+@model IEnumerable<HastaneTakipsistemi.Models.Appointment>
+
+<h2>Randevularım</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Hasta</th>
+            <th>Tarih</th>
+            <th>Durum</th>
+            <th>Notlar</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var appointment in Model)
+        {
+            <tr>
+                <td>@appointment.Patient.UserName</td>
+                <td>@appointment.AppointmentDate.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@appointment.Status</td>
+                <td>@appointment.Notes</td>
+                <td>
+                    <form asp-action="UpdateStatus" asp-route-id="@appointment.Id">
+                        <select name="status" asp-items="Html.GetEnumSelectList<AppointmentStatus>()" class="form-control">
+                            <option selected="@(appointment.Status)">@(appointment.Status)</option>
+                        </select>
+                        <button type="submit" class="btn btn-sm btn-primary">Güncelle</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

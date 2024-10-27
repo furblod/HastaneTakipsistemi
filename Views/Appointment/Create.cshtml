@@ -1,0 +1,24 @@
+@model HastaneTakipsistemi.Models.Appointment
+
+<h2>Randevu Oluştur</h2>
+
+<form asp-action="Create">
+    <div class="form-group">
+        <label asp-for="DoctorId">Doktor</label>
+        <select asp-for="DoctorId" asp-items="ViewBag.Doctors" class="form-control">
+            <option>Doktor Seçiniz...</option>
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="AppointmentDate">Randevu Tarihi</label>
+        <input asp-for="AppointmentDate" type="datetime-local" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Notes">Notlar</label>
+        <textarea asp-for="Notes" class="form-control"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Randevu Oluştur</button>
+</form>
