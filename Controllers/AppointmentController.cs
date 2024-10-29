@@ -53,7 +53,7 @@ namespace HastaneTakipsistemi.Controllers
                     return RedirectToAction(nameof(MyAppointments));
                 }
                 catch (Exception ex)
-                {              
+                {
                     Console.WriteLine($"Hata: {ex.Message}");
                     ModelState.AddModelError("", "Randevu oluşturulurken bir hata oluştu.");
                 }
@@ -115,6 +115,31 @@ namespace HastaneTakipsistemi.Controllers
             appointment.Status = status;
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(DoctorAppointments));
+        }
+
+        [Authorize(Roles = "Doctor")]
+        public async Task<IActionResult> PatientDetails(string patientId)
+        {
+            var patient = await _userManager.FindByIdAsync(patientId);
+            if (patient == null)
+            {
+                return NotFound();
+            }
+            return View(patient);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = "Doctor")]
+        public async Task<IActionResult> UpdateMedicalHistory(string patientId, string medicalHistory)
+        {
+            var patient = await _userManager.FindByIdAsync(patientId);
+            if (patient == null)
+            {
+                return NotFound();
+            }
+            patient.MedicalHistory = medicalHistory;
+            await _userManager.UpdateAsync(patient);
+            return RedirectToAction(nameof(PatientDetails), new { patientId = patientId });
         }
     }
 }

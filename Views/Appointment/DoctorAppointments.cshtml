@@ -10,6 +10,7 @@
             <th>Durum</th>
             <th>Notlar</th>
             <th>İşlemler</th>
+            <th>Ayrıntılar</th>
         </tr>
     </thead>
     <tbody>
@@ -28,6 +29,8 @@
                         <button type="submit" class="btn btn-sm btn-primary">Güncelle</button>
                     </form>
                 </td>
+                <td><a asp-action="PatientDetails" asp-route-patientId="@appointment.PatientId"
+                        class="btn btn-info btn-sm">Ayrıntılar</a></td>
             </tr>
         }
     </tbody>

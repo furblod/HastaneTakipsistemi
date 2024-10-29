@@ -1,0 +1,27 @@
+@model ApplicationUser
+
+<h2>Hasta Detayları</h2>
+
+<dl class="row">
+    <dt class="col-sm-3">Ad:</dt>
+    <dd class="col-sm-9">@Model.FirstName</dd>
+
+    <dt class="col-sm-3">Soyad:</dt>
+    <dd class="col-sm-9">@Model.LastName</dd>
+
+    <dt class="col-sm-3">Email:</dt>
+    <dd class="col-sm-9">@Model.Email</dd>
+
+    <dt class="col-sm-3">Yaş:</dt>
+    <dd class="col-sm-9">@Model.Age</dd>
+
+    <dt class="col-sm-3">Cinsiyet:</dt>
+    <dd class="col-sm-9">@Model.Gender</dd>
+</dl>
+
+<h3>Tıbbi Geçmiş</h3>
+<form asp-action="UpdateMedicalHistory" method="post">
+    <input type="hidden" name="patientId" value="@Model.Id" />
+    <textarea name="medicalHistory" class="form-control" rows="5">@Model.MedicalHistory</textarea>
+    <button type="submit" class="btn btn-primary mt-2">Güncelle</button>
+</form>
