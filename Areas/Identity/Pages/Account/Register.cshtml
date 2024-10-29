@@ -9,49 +9,82 @@
 <div class="row">
     <div class="col-md-4">
         <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h2>Yeni hesap oluştur.</h2>
+            <h2>Create a new account.</h2>
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.FirstName" class="form-control" autocomplete="firstname" aria-required="true" placeholder="Ad" />
-                <label asp-for="Input.FirstName">Ad</label>
-                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-floating mb-3">
-                <input asp-for="Input.LastName" class="form-control" autocomplete="lastname" aria-required="true" placeholder="Soyad" />
-                <label asp-for="Input.LastName">Soyad</label>
-                <span asp-validation-for="Input.LastName" class="text-danger"></span>
-            </div>
             <div class="form-floating mb-3">
                 <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
                 <label asp-for="Input.Email">Email</label>
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">
+                <input asp-for="Input.FirstName" class="form-control" autocomplete="firstname" aria-required="true" />
+                <label asp-for="Input.FirstName">First Name</label>
+                <span asp-validation-for="Input.FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <input asp-for="Input.LastName" class="form-control" autocomplete="lastname" aria-required="true" />
+                <label asp-for="Input.LastName">Last Name</label>
+                <span asp-validation-for="Input.LastName" class="text-danger"></span>
+            </div>
+            <div class="form-floating mb-3">
+                <select asp-for="Input.Role" class="form-control" id="roleSelect">
+                    <option value="">Select Role</option>
+                    <option value="Patient">Patient</option>
+                    <option value="Doctor">Doctor</option>
+                </select>
+                <label asp-for="Input.Role">Role</label>
+                <span asp-validation-for="Input.Role" class="text-danger"></span>
+            </div>
+
+            <div id="patientFields" style="display:none;">
+                <div class="form-floating mb-3">
+                    <input asp-for="Input.Age" class="form-control" aria-required="true" />
+                    <label asp-for="Input.Age">Age</label>
+                    <span asp-validation-for="Input.Age" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <select asp-for="Input.Gender" class="form-control">
+                        <option value="">Select Gender</option>
+                        <option value="Male">Erkek</option>
+                        <option value="Female">Kadın</option>                      
+                    </select>
+                    <label asp-for="Input.Gender">Gender</label>
+                    <span asp-validation-for="Input.Gender" class="text-danger"></span>
+                </div>
+                <div class="form-floating mb-3">
+                    <textarea asp-for="Input.MedicalHistory" class="form-control" rows="4"></textarea>
+                    <label asp-for="Input.MedicalHistory">Medical History</label>
+                    <span asp-validation-for="Input.MedicalHistory" class="text-danger"></span>
+                </div>
+            </div>
+
+            <div class="form-floating mb-3">
                 <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                <label asp-for="Input.Password">Şifre</label>
+                <label asp-for="Input.Password">Password</label>
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">
                 <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
-                <label asp-for="Input.ConfirmPassword">Şifre Tekrar</label>
+                <label asp-for="Input.ConfirmPassword">Confirm Password</label>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
-            <div class="form-floating mb-3">
-                <select asp-for="Input.Role" class="form-control">
-                    <option value="">Rol Seçin</option>
-                    <option value="Admin">Admin</option>
-                    <option value="Doctor">Doktor</option>
-                    <option value="Patient">Hasta</option>
-                </select>
-                <label asp-for="Input.Role">Rol</label>
-                <span asp-validation-for="Input.Role" class="text-danger"></span>
-            </div>
-            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Kayıt Ol</button>
+            <button id="registerSubmit" type="submit" class="w-100 btn btn-lg btn-primary">Register</button>
         </form>
     </div>
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function() {
+            $('#roleSelect').change(function() {
+                if ($(this).val() === 'Patient') {
+                    $('#patientFields').show();
+                } else {
+                    $('#patientFields').hide();
+                }
+            });
+        });
+    </script>
 }
