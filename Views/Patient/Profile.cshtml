@@ -1,0 +1,35 @@
+@model HastaneTakipsistemi.Models.ApplicationUser
+
+@{
+    ViewData["Title"] = "Hasta Profili";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<div>
+    <h4>Kişisel Bilgiler</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-3">Ad:</dt>
+        <dd class="col-sm-9">@Model.FirstName</dd>
+
+        <dt class="col-sm-3">Soyad:</dt>
+        <dd class="col-sm-9">@Model.LastName</dd>
+
+        <dt class="col-sm-3">E-posta:</dt>
+        <dd class="col-sm-9">@Model.Email</dd>
+
+        <dt class="col-sm-3">Yaş:</dt>
+        <dd class="col-sm-9">@Model.Age</dd>
+
+        <dt class="col-sm-3">Cinsiyet:</dt>
+        <dd class="col-sm-9">@Model.Gender</dd>
+
+        <dt class="col-sm-3">Tıbbi Geçmiş:</dt>
+        <dd class="col-sm-9">@Model.MedicalHistory</dd>
+    </dl>
+</div>
+
+<div>
+    <a asp-controller="Appointment" asp-action="MyAppointments" class="btn btn-primary">Randevularım</a>
+</div>

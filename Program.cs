@@ -21,7 +21,7 @@ var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
-    
+
     // Veritabanını oluştur
     using (var scope = app.Services.CreateScope())
     {
@@ -31,9 +31,9 @@ if (app.Environment.IsDevelopment())
             var context = services.GetRequiredService<ApplicationDbContext>();
             var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
             var roleManager = services.GetRequiredService<RoleManager<IdentityRole>>();
-            
+
             context.Database.EnsureCreated();
-            
+
             // Rolleri oluştur
             if (!roleManager.RoleExistsAsync("Admin").Result)
             {
@@ -73,6 +73,10 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "patient",
+    pattern: "{controller=Patient}/{action=Profile}/{id?}");
 app.MapRazorPages();
 
 app.Run();
