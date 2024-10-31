@@ -1,36 +1,74 @@
-@model ApplicationUser
+@model PatientDetailsViewModel
 
-<h2>Hasta Detayları</h2>
+<div class="container">
+    <h2>Hasta Bilgileri</h2>
 
-<dl class="row">
-    <dt class="col-sm-3">Ad:</dt>
-    <dd class="col-sm-9">@Model.FirstName</dd>
+    <div class="card mb-4">
+        <div class="card-header">
+            <h4>@Model.FirstName @Model.LastName Yaş: @Model.Age
+                <h4 />
+        </div>
+        <div class="card-body">
+            <form asp-action="UpdatePatientDetails" method="post">
+                <input type="hidden" asp-for="PatientId" />
 
-    <dt class="col-sm-3">Soyad:</dt>
-    <dd class="col-sm-9">@Model.LastName</dd>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label asp-for="BloodType" class="control-label"></label>
+                            <select asp-for="BloodType" class="form-control">
+                                <option value="">Seçiniz</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                            </select>
+                        </div>
 
-    <dt class="col-sm-3">Email:</dt>
-    <dd class="col-sm-9">@Model.Email</dd>
+                        <div class="form-group mb-3">
+                            <label asp-for="Allergies" class="control-label"></label>
+                            <textarea asp-for="Allergies" class="form-control" rows="3"></textarea>
+                        </div>
+                    </div>
 
-    <dt class="col-sm-3">Yaş:</dt>
-    <dd class="col-sm-9">@Model.Age</dd>
+                    <div class="col-md-6">
+                        <div class="form-group mb-3">
+                            <label asp-for="ChronicDiseases" class="control-label"></label>
+                            <textarea asp-for="ChronicDiseases" class="form-control" rows="3"></textarea>
+                        </div>
 
-    <dt class="col-sm-3">Cinsiyet:</dt>
-    <dd class="col-sm-9">@Model.Gender</dd>
+                        <div class="form-group mb-3">
+                            <label asp-for="MedicalHistory" class="control-label"></label>
+                            <textarea asp-for="MedicalHistory" class="form-control" rows="5"></textarea>
+                        </div>
+                    </div>
+                </div>
 
-    <dt class="col-sm-3">Kan Gurubu:</dt>
-    <dd class="col-sm-9">@Model.BloodType</dd>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Bilgileri Güncelle</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
-    <dt class="col-sm-3">Alerjiler:</dt>
-    <dd class="col-sm-9">@Model.Allergies</dd>
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success">
+            @TempData["SuccessMessage"]
+        </div>
+    }
 
-    <dt class="col-sm-3">Kronik Hastalık:</dt>
-    <dd class="col-sm-9">@Model.ChronicDiseases</dd>
-</dl>
+    <div>
+        <a asp-action="DoctorAppointments" class="btn btn-secondary">Randevulara Geri Dön</a>
+    </div>
+</div>
 
-<h3>Tıbbi Geçmiş</h3>
-<form asp-action="UpdateMedicalHistory" method="post">
-    <input type="hidden" name="patientId" value="@Model.Id" />
-    <textarea name="medicalHistory" class="form-control" rows="5">@Model.MedicalHistory</textarea>
-    <button type="submit" class="btn btn-primary mt-2">Güncelle</button>
-</form>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

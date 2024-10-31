@@ -16,7 +16,7 @@
         @foreach (var appointment in Model)
         {
             <tr>
-                <td>@appointment.Doctor.UserName</td>
+                <td>@appointment.Doctor.FirstName @appointment.Doctor.LastName</td>
                 <td>@appointment.AppointmentDate.ToString("dd/MM/yyyy HH:mm")</td>
                 <td>@appointment.Status</td>
                 <td>@appointment.Notes</td>
@@ -25,4 +25,4 @@
     </tbody>
 </table>
 
-<a asp-action="Create" class ="btn btn-primary">Yeni Randevu Oluştur</a>    
+<a asp-action="Create" class="btn btn-primary">Yeni Randevu Oluştur</a>

@@ -26,7 +26,13 @@ namespace HastaneTakipsistemi.Controllers
         public async Task<IActionResult> Create()
         {
             var doctors = await _userManager.GetUsersInRoleAsync("Doctor");
-            ViewBag.Doctors = new SelectList(doctors, "Id", "UserName");
+            var doctorList = doctors.Select(d => new
+            {
+                Id = d.Id,
+                FullName = $"Dr. {d.FirstName} {d.LastName}"
+            }).ToList();
+            ViewBag.Doctors = new SelectList(doctorList, "Id", "FullName");
+
             return View();
         }
 
@@ -125,21 +131,55 @@ namespace HastaneTakipsistemi.Controllers
             {
                 return NotFound();
             }
-            return View(patient);
+
+            var viewModel = new PatientDetailsViewModel
+            {
+                PatientId = patient.Id,
+                FirstName = patient.FirstName,
+                LastName = patient.LastName,
+                Age = patient.Age,
+                Gender = patient.Gender,
+                BloodType = patient.BloodType,
+                Allergies = patient.Allergies,
+                ChronicDiseases = patient.ChronicDiseases,
+                MedicalHistory = patient.MedicalHistory
+            };
+
+            return View(viewModel);
         }
 
         [HttpPost]
         [Authorize(Roles = "Doctor")]
-        public async Task<IActionResult> UpdateMedicalHistory(string patientId, string medicalHistory)
+        public async Task<IActionResult> UpdatePatientDetails(PatientDetailsViewModel model)
         {
-            var patient = await _userManager.FindByIdAsync(patientId);
+            if (!ModelState.IsValid)
+            {
+                return View("PatientDetails", model);
+            }
+
+            var patient = await _userManager.FindByIdAsync(model.PatientId);
             if (patient == null)
             {
                 return NotFound();
             }
-            patient.MedicalHistory = medicalHistory;
-            await _userManager.UpdateAsync(patient);
-            return RedirectToAction(nameof(PatientDetails), new { patientId = patientId });
+
+            patient.BloodType = model.BloodType;
+            patient.Allergies = model.Allergies;
+            patient.ChronicDiseases = model.ChronicDiseases;
+            patient.MedicalHistory = model.MedicalHistory;
+
+            var result = await _userManager.UpdateAsync(patient);
+            if (result.Succeeded)
+            {
+                TempData["SuccessMessage"] = "Hasta bilgileri başarıyla güncellendi.";
+            }
+            else
+            {
+                ModelState.AddModelError("", "Güncelleme işlemi başarısız oldu.");
+                return View("PatientDetails", model);
+            }
+
+            return RedirectToAction(nameof(PatientDetails), new { patientId = model.PatientId });
         }
     }
 }

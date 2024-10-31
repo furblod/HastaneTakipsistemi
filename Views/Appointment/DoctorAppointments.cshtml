@@ -17,7 +17,7 @@
         @foreach (var appointment in Model)
         {
             <tr>
-                <td>@appointment.Patient.UserName</td>
+                <td>@appointment.Patient.FirstName @appointment.Patient.LastName</td>
                 <td>@appointment.AppointmentDate.ToString("dd/MM/yyyy HH:mm")</td>
                 <td>@appointment.Status</td>
                 <td>@appointment.Notes</td>
