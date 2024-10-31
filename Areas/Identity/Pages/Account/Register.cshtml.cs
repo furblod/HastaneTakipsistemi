@@ -89,6 +89,14 @@ namespace HastaneTakipsistemi.Areas.Identity.Pages.Account
 
             [Display(Name = "Medical History")]
             public string MedicalHistory { get; set; }
+            [Display(Name = "Kan Grubu")]
+            public string BloodType { get; set; }
+
+            [Display(Name = "Alerjiler")]
+            public string Allergies { get; set; }
+
+            [Display(Name = "Kronik Hastalıklar")]
+            public string ChronicDiseases { get; set; }
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -102,7 +110,7 @@ namespace HastaneTakipsistemi.Areas.Identity.Pages.Account
                     Email = Input.Email,
                     FirstName = Input.FirstName,
                     LastName = Input.LastName
-                    
+
                 };
 
                 if (Input.Role == "Patient")
@@ -110,6 +118,9 @@ namespace HastaneTakipsistemi.Areas.Identity.Pages.Account
                     user.Age = Input.Age;
                     user.Gender = Input.Gender;
                     user.MedicalHistory = Input.MedicalHistory;
+                    user.BloodType = Input.BloodType;
+                    user.Allergies = Input.Allergies;
+                    user.ChronicDiseases = Input.ChronicDiseases;
                 }
 
                 var result = await _userManager.CreateAsync(user, Input.Password);

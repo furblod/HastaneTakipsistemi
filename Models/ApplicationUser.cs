@@ -9,5 +9,8 @@ namespace HastaneTakipsistemi.Models
         public int? Age { get; set; }
         public string? Gender { get; set; }
         public string? MedicalHistory { get; set; }
+        public string? BloodType { get; set; }
+        public string? Allergies { get; set; }
+        public string? ChronicDiseases { get; set; }
     }
 }

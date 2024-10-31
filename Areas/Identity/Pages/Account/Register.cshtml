@@ -13,7 +13,8 @@
             <hr />
             <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
             <div class="form-floating mb-3">
-                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
+                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true"
+                    placeholder="name@example.com" />
                 <label asp-for="Input.Email">Email</label>
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
             </div>
@@ -47,7 +48,7 @@
                     <select asp-for="Input.Gender" class="form-control">
                         <option value="">Select Gender</option>
                         <option value="Male">Erkek</option>
-                        <option value="Female">Kadın</option>                      
+                        <option value="Female">Kadın</option>
                     </select>
                     <label asp-for="Input.Gender">Gender</label>
                     <span asp-validation-for="Input.Gender" class="text-danger"></span>
@@ -57,15 +58,41 @@
                     <label asp-for="Input.MedicalHistory">Medical History</label>
                     <span asp-validation-for="Input.MedicalHistory" class="text-danger"></span>
                 </div>
+                <div class="form-group">
+                    <label asp-for="Input.BloodType" class="control-label"></label>
+                    <select asp-for="Input.BloodType" class="form-control">
+                        <option value="">Seçiniz</option>
+                        <option value="A+">A+</option>
+                        <option value="A-">A-</option>
+                        <option value="B+">B+</option>
+                        <option value="B-">B-</option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                        <option value="O+">O+</option>
+                        <option value="O-">O-</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Input.Allergies" class="control-label"></label>
+                    <input asp-for="Input.Allergies" class="form-control" />
+                </div>
+
+                <div class="form-group">
+                    <label asp-for="Input.ChronicDiseases" class="control-label"></label>
+                    <input asp-for="Input.ChronicDiseases" class="form-control" />
+                </div>
             </div>
 
             <div class="form-floating mb-3">
-                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true"
+                    placeholder="password" />
                 <label asp-for="Input.Password">Password</label>
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
             </div>
             <div class="form-floating mb-3">
-                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" placeholder="password" />
+                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password"
+                    aria-required="true" placeholder="password" />
                 <label asp-for="Input.ConfirmPassword">Confirm Password</label>
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
             </div>
@@ -77,8 +104,8 @@
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
     <script>
-        $(document).ready(function() {
-            $('#roleSelect').change(function() {
+        $(document).ready(function () {
+            $('#roleSelect').change(function () {
                 if ($(this).val() === 'Patient') {
                     $('#patientFields').show();
                 } else {
