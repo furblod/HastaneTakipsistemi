@@ -25,32 +25,44 @@ namespace HastaneTakipsistemi.Controllers
         [Authorize(Roles = "Patient")]
         public async Task<IActionResult> Create()
         {
-            var doctors = await _userManager.GetUsersInRoleAsync("Doctor");
-            var doctorList = doctors.Select(d => new
-            {
-                Id = d.Id,
-                FullName = $"Dr. {d.FirstName} {d.LastName}"
-            }).ToList();
-            ViewBag.Doctors = new SelectList(doctorList, "Id", "FullName");
-
+            var specializations = new List<string> { "Dahiliye", "Kardiyoloji", "Nöroloji", "Ortopedi", "Pediatri", "Psikiyatri" };
+            ViewBag.Specializations = new SelectList(specializations);
             return View();
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Patient")]
+        public async Task<IActionResult> GetDoctorsBySpecialization(string specialization)
+        {
+            var doctors = await _userManager.GetUsersInRoleAsync("Doctor");
+            var doctorsInSpecialization = doctors
+                .Where(d => d.Specialization == specialization)
+                .Select(d => new
+                {
+                    Id = d.Id,
+                    FullName = $"Dr. {d.FirstName} {d.LastName}"
+                })
+                .ToList();
+
+            return Json(doctorsInSpecialization);
         }
 
         // Randevu oluşturma işlemi
         [HttpPost]
         [Authorize(Roles = "Patient")]
-        public async Task<IActionResult> Create(Appointment appointment)
+        public async Task<IActionResult> Create(Appointment appointment, string Specialization)
         {
-            if (appointment == null)
-            {
-                ModelState.AddModelError("", "Randevu bilgileri geçersiz.");
-                return View(appointment);
-            }
-
             if (ModelState.IsValid)
             {
                 appointment.PatientId = _userManager.GetUserId(User);
                 appointment.Status = AppointmentStatus.Pending;
+
+                var doctor = await _userManager.FindByIdAsync(appointment.DoctorId);
+                if (doctor == null || doctor.Specialization != Specialization)
+                {
+                    ModelState.AddModelError("DoctorId", "Geçersiz doktor seçimi.");
+                    return View(appointment);
+                }
 
                 try
                 {
@@ -60,21 +72,14 @@ namespace HastaneTakipsistemi.Controllers
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"Hata: {ex.Message}");
                     ModelState.AddModelError("", "Randevu oluşturulurken bir hata oluştu.");
                 }
             }
-            else
-            {
-                var errors = ModelState.Values.SelectMany(v => v.Errors);
-                foreach (var error in errors)
-                {
-                    Console.WriteLine(error.ErrorMessage);
-                }
-            }
 
-            var doctors = await _userManager.GetUsersInRoleAsync("Doctor");
-            ViewBag.Doctors = new SelectList(doctors, "Id", "User Name");
+            // Hata durumunda formun tekrar yüklenmesi için gerekli verileri hazırlayalım
+            var specializations = new List<string> { "Dahiliye", "Kardiyoloji", "Nöroloji", "Ortopedi", "Pediatri", "Psikiyatri" };
+            ViewBag.Specializations = new SelectList(specializations);
+
             return View(appointment);
         }
 

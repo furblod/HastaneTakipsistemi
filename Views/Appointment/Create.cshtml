@@ -3,11 +3,20 @@
 <h2>Randevu Oluştur</h2>
 
 <form asp-action="Create">
+
+    <div class="form-group">
+        <label for="Specialization">Uzmanlık Alanı</label>
+        <select id="Specialization" name="Specialization" class="form-control" asp-items="ViewBag.Specializations">
+            <option value="">Uzmanlık Alanı Seçiniz</option>
+        </select>
+    </div>
+
     <div class="form-group">
         <label asp-for="DoctorId">Doktor</label>
-        <select asp-for="DoctorId" asp-items="ViewBag.Doctors" class="form-control">
-            <option>Doktor Seçiniz...</option>
+        <select asp-for="DoctorId" class="form-control" disabled>
+            <option value="">Önce Uzmanlık Alanı Seçiniz</option>
         </select>
+        <span asp-validation-for="DoctorId" class="text-danger"></span>
     </div>
 
     <div class="form-group">
@@ -22,3 +31,30 @@
 
     <button type="submit" class="btn btn-primary mt-3">Randevu Oluştur</button>
 </form>
+
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            $('#Specialization').change(function () {
+                var specialization = $(this).val();
+                var doctorSelect = $('#DoctorId');
+
+                doctorSelect.empty().prop('disabled', true);
+                doctorSelect.append($('<option></option>').val('').text('Doktor Seçiniz'));
+
+                if (specialization) {
+                    $.getJSON('@Url.Action("GetDoctorsBySpecialization")', { specialization: specialization }, function (doctors) {
+                        if (doctors && doctors.length > 0) {
+                            $.each(doctors, function (index, doctor) {
+                                doctorSelect.append($('<option></option>').val(doctor.id).text(doctor.fullName));
+                            });
+                            doctorSelect.prop('disabled', false);
+                        } else {
+                            doctorSelect.append($('<option></option>').val('').text('Bu alanda doktor bulunamadı'));
+                        }
+                    });
+                }
+            });
+        });
+    </script>
+}
