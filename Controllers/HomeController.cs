@@ -33,6 +33,10 @@ namespace HastaneTakipsistemi.Controllers
             {
                 return RedirectToAction("DoctorAppointments", "Appointment");
             }
+            else if (user != null && await _userManager.IsInRoleAsync(user, "Admin"))
+            {
+                return RedirectToAction("Index", "Admin");
+            }
             return View();
         }
 

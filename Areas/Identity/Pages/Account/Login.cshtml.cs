@@ -99,6 +99,10 @@ namespace HastaneTakipsistemi.Areas.Identity.Pages.Account
                         // Eğer doktor ise, randevular sayfasına yönlendir
                         return RedirectToAction("DoctorAppointments", "Appointment");
                     }
+                    else if (await _userManager.IsInRoleAsync(user, "Admin"))
+                    {
+                        return RedirectToAction("Index", "Admin");
+                    }
 
                     return LocalRedirect(returnUrl);
                 }
