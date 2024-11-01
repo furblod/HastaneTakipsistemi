@@ -97,6 +97,9 @@ namespace HastaneTakipsistemi.Areas.Identity.Pages.Account
 
             [Display(Name = "Kronik Hastalıklar")]
             public string ChronicDiseases { get; set; }
+
+            [Display(Name = "Uzmanlık Alanı")]
+            public string Specialization { get; set; }
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -121,6 +124,10 @@ namespace HastaneTakipsistemi.Areas.Identity.Pages.Account
                     user.BloodType = Input.BloodType;
                     user.Allergies = Input.Allergies;
                     user.ChronicDiseases = Input.ChronicDiseases;
+                }
+                else if (Input.Role == "Doctor")
+                {
+                    user.Specialization = Input.Specialization;
                 }
 
                 var result = await _userManager.CreateAsync(user, Input.Password);
