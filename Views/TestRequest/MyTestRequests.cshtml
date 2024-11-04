@@ -1,0 +1,41 @@
+@model IEnumerable<HastaneTakipsistemi.Models.TestRequest>
+@{
+    ViewData["Title"] = "Tahlil Sonuçlarım";
+}
+
+<h1>Tahlil Sonuçlarım</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Tahlil Türü</th>
+            <th>Doktor</th>
+            <th>Tarih</th>
+            <th>Durum</th>
+            <th>Notlar</th>
+            <th>Sonuç</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var testRequest in Model)
+        {
+            <tr>
+                <td>@testRequest.TestType</td>
+                <td>Dr. @testRequest.Doctor?.FirstName @testRequest.Doctor?.LastName</td>
+                <td>@testRequest.RequestDate.ToShortDateString()</td>
+                <td>@testRequest.Status</td>
+                <td>@testRequest.Notes</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(testRequest.ResultFile))
+                    {
+                        <a href="/test-results/@testRequest.ResultFile" target="_blank" class="btn btn-info btn-sm">Görüntüle</a>
+                    }
+                    else
+                    {
+                        <span>Sonuç henüz yüklenmedi</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

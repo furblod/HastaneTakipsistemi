@@ -1,6 +1,9 @@
 @model IEnumerable<HastaneTakipsistemi.Models.Appointment>
+@{
+    ViewData["Title"] = "Randevularım";
+}
 
-<h2>Randevularım</h2>
+<h1>Randevularım</h1>
 
 <table class="table">
     <thead>
@@ -10,28 +13,88 @@
             <th>Durum</th>
             <th>Notlar</th>
             <th>İşlemler</th>
-            <th>Ayrıntılar</th>
+
         </tr>
     </thead>
     <tbody>
         @foreach (var appointment in Model)
         {
             <tr>
-                <td>@appointment.Patient.FirstName @appointment.Patient.LastName</td>
-                <td>@appointment.AppointmentDate.ToString("dd/MM/yyyy HH:mm")</td>
+                <td>@appointment.Patient?.FirstName @appointment.Patient?.LastName</td>
+                <td>@appointment.AppointmentDate.ToString("g")</td>
                 <td>@appointment.Status</td>
                 <td>@appointment.Notes</td>
                 <td>
-                    <form asp-action="UpdateStatus" asp-route-id="@appointment.Id">
-                        <select name="status" asp-items="Html.GetEnumSelectList<AppointmentStatus>()" class="form-control">
-                            <option selected="@(appointment.Status)">@(appointment.Status)</option>
-                        </select>
-                        <button type="submit" class="btn btn-sm btn-primary">Güncelle</button>
-                    </form>
+                    <div class="btn-group">
+                        @if (appointment.Status == AppointmentStatus.Pending)
+                        {
+                            <form asp-action="UpdateStatus" method="post" style="display: inline;">
+                                <input type="hidden" name="id" value="@appointment.Id" />
+                                <input type="hidden" name="status" value="@AppointmentStatus.Approved" />
+                                <button type="submit" class="btn btn-success btn-sm">Onayla</button>
+                            </form>
+                            <form asp-action="UpdateStatus" method="post" style="display: inline;">
+                                <input type="hidden" name="id" value="@appointment.Id" />
+                                <input type="hidden" name="status" value="@AppointmentStatus.Cancelled" />
+                                <button type="submit" class="btn btn-danger btn-sm">İptal Et</button>
+                            </form>
+                        }
+                        <a asp-action="PatientDetails" asp-route-patientId="@appointment.PatientId"
+                            class="btn btn-info btn-sm">Hasta Detayları</a>
+                        <button type="button" class="btn btn-primary btn-sm"
+                            onclick="openTestRequestModal(@appointment.Id)">
+                            Tahlil İste
+                        </button>
+                    </div>
                 </td>
-                <td><a asp-action="PatientDetails" asp-route-patientId="@appointment.PatientId"
-                        class="btn btn-info btn-sm">Ayrıntılar</a></td>
             </tr>
         }
     </tbody>
 </table>
+
+<!-- Modal -->
+<div class="modal fade" id="requestTestModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Tahlil İste</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <form asp-controller="TestRequest" asp-action="Create" method="post">
+                <div class="modal-body">
+                    <input type="hidden" name="appointmentId" id="appointmentId" />
+                    <div class="mb-3">
+                        <label class="form-label">Tahlil Türü</label>
+                        <select name="testType" class="form-select" required>
+                            <option value="">Seçiniz</option>
+                            <option value="BloodTest">Kan Tahlili</option>
+                            <option value="UrineTest">İdrar Tahlili</option>
+                            <option value="XRay">Röntgen</option>
+                            <option value="MRI">MR</option>
+                            <option value="Ultrasound">Ultrason</option>
+                            <option value="Other">Diğer</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Notlar</label>
+                        <textarea name="notes" class="form-control" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
+                    <button type="submit" class="btn btn-primary">Tahlil İste</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function openTestRequestModal(appointmentId) {
+            document.getElementById('appointmentId').value = appointmentId;
+            var modal = new bootstrap.Modal(document.getElementById('requestTestModal'));
+            modal.show();
+        }
+    </script>
+}

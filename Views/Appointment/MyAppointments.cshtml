@@ -10,16 +10,21 @@
             <th>Tarih</th>
             <th>Durum</th>
             <th>Notlar</th>
+            <th>Tahlil Sonuçları</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var appointment in Model)
         {
             <tr>
-                <td>@appointment.Doctor.FirstName @appointment.Doctor.LastName</td>
+                <td>@appointment.Doctor?.FirstName @appointment.Doctor?.LastName</td>
                 <td>@appointment.AppointmentDate.ToString("dd/MM/yyyy HH:mm")</td>
                 <td>@appointment.Status</td>
                 <td>@appointment.Notes</td>
+                <td>
+                    <a asp-controller="TestRequest" asp-action="MyTestRequests" asp-route-appointmentId="@appointment.Id"
+                        class="btn btn-secondary btn-sm">Tahlil Sonuçları</a>
+                </td>
             </tr>
         }
     </tbody>

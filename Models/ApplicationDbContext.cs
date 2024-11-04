@@ -11,6 +11,7 @@ namespace HastaneTakipsistemi.Models
         {
         }
         public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<TestRequest> TestRequests { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -27,6 +28,24 @@ namespace HastaneTakipsistemi.Models
                 .HasOne(a => a.Doctor)
                 .WithMany()
                 .HasForeignKey(a => a.DoctorId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<TestRequest>()
+            .HasOne(tr => tr.Doctor)
+            .WithMany()
+            .HasForeignKey(tr => tr.DoctorId)
+            .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<TestRequest>()
+                .HasOne(tr => tr.Patient)
+                .WithMany()
+                .HasForeignKey(tr => tr.PatientId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<TestRequest>()
+                .HasOne(tr => tr.Appointment)
+                .WithMany()
+                .HasForeignKey(tr => tr.AppointmentId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

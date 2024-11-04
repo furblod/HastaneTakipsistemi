@@ -46,6 +46,11 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     }
+    @if (User.IsInRole("Doctor"))
+    {
+        <a class="btn btn-primary" asp-area="" asp-controller="TestRequest" asp-action="RequestedTests">İstenen
+            Tahliller</a>
+    }
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2024 - HastaneTakipsistemi - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
