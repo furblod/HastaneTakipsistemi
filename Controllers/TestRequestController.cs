@@ -73,5 +73,35 @@ namespace HastaneTakipsistemi.Controllers
 
             return RedirectToAction(nameof(RequestedTests));
         }
+        [HttpPost]
+        [Authorize(Roles = "Doctor")]
+        public async Task<IActionResult> Create([FromForm] TestRequest testRequest)
+        {
+            if (ModelState.IsValid)
+            {
+                // Gerekli alanları doldurun
+                testRequest.RequestDate = DateTime.Now;
+                testRequest.Status = TestStatus.Requested; // Başlangıç durumu
+                testRequest.DoctorId = _userManager.GetUserId(User); // Doktorun ID'si
+
+                // Randevuya bağlı olarak hastanın ID'sini alın
+                var appointment = await _context.Appointments.FindAsync(testRequest.AppointmentId);
+                if (appointment != null)
+                {
+                    testRequest.PatientId = appointment.PatientId; // Hastanın ID'sini al
+                }
+
+                // Test türü ve notları ayarlayın
+                testRequest.TestType = (TestType)Enum.Parse(typeof(TestType), testRequest.TestType.ToString());
+                testRequest.Notes = testRequest.Notes;
+
+                _context.TestRequests.Add(testRequest);
+                await _context.SaveChangesAsync();
+
+                return Ok(); // Başarılı yanıt
+            }
+
+            return BadRequest(); // Hatalı durum
+        }
     }
 }

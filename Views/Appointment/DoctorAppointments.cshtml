@@ -53,19 +53,20 @@
 </table>
 
 <!-- Modal -->
-<div class="modal fade" id="requestTestModal" tabindex="-1">
-    <div class="modal-dialog">
+<div class="modal fade" id="requestTestModal" tabindex="-1" role="dialog" aria-labelledby="testRequestModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Tahlil İste</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
-            <form asp-controller="TestRequest" asp-action="RequestedTests" method="post">
+            <form asp-controller="TestRequest" id="testRequestForm" asp-action="RequestedTests" method="post">
                 <div class="modal-body">
                     <input type="hidden" name="appointmentId" id="appointmentId" />
                     <div class="mb-3">
-                        <label class="form-label">Tahlil Türü</label>
-                        <select name="testType" class="form-select" required>
+                        <label for="testType" class="form-label">Tahlil Türü</label>
+                        <select id="testType" name="testType" class="form-select" required>
                             <option value="">Seçiniz</option>
                             <option value="BloodTest">Kan Tahlili</option>
                             <option value="UrineTest">İdrar Tahlili</option>
@@ -75,10 +76,14 @@
                             <option value="Other">Diğer</option>
                         </select>
                     </div>
-                    <div class="mb-3">
-                        <label class="form-label">Notlar</label>
-                        <textarea name="notes" class="form-control" rows="3"></textarea>
+                    <div class="form-group">
+                        <label for="notes">Notlar</label>
+                        <textarea id="notes" name="notes" class="form-control"></textarea>
                     </div>
+                    @* <div class="mb-3">
+                    <label class="form-label">Notlar</label>
+                    <textarea name="notes" class="form-control" rows="3"></textarea>
+                    </div> *@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>
@@ -96,5 +101,32 @@
             var modal = new bootstrap.Modal(document.getElementById('requestTestModal'));
             modal.show();
         }
+        $(document).ready(function () {
+            $("#testRequestForm").submit(function (event) {
+                event.preventDefault(); // Formun varsayılan davranışını engelle
+
+                var formData = {
+                    appointmentId: $("#appointmentId").val(),
+                    testType: $("#testType").val(), // Modalda seçilen tahlil türü
+                    notes: $("#notes").val() // Modalda girilen notlar
+                };
+
+                $.ajax({
+                    type: "POST",
+                    url: "/TestRequest/Create", // Tahlil isteği eklemek için uygun URL
+                    data: formData,
+                    success: function (response) {
+                        // Başarılı yanıt
+                        alert("Tahlil isteği başarıyla oluşturuldu.");
+                        $('#testRequestModal').modal('hide'); // Modalı kapat
+                        // Gerekirse sayfayı yenileyin veya güncelleyin
+                    },
+                    error: function (error) {
+                        // Hata durumu
+                        alert("Bir hata oluştu: " + error.responseText);
+                    }
+                });
+            });
+        });
     </script>
 }
