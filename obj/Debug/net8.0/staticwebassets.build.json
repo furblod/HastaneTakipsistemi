@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "h0sW9yvpnx2cBZ9DiCl8kamQ4N26xx+Xo4L8lkOr7kw=",
+  "Hash": "04wvP/4LWUpdG7kM87shH0oaQistkBqCF83CCiz4FE0=",
   "Source": "HastaneTakipsistemi",
   "BasePath": "_content/HastaneTakipsistemi",
   "Mode": "Default",
@@ -2333,6 +2333,44 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\jquery\\LICENSE.txt"
+    },
+    {
+      "Identity": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\wwwroot\\test-results\\2024-2025 GÜZ DÖNEMİ STAJ DUYURUSU.pdf",
+      "SourceId": "HastaneTakipsistemi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\wwwroot\\",
+      "BasePath": "_content/HastaneTakipsistemi",
+      "RelativePath": "test-results/2024-2025 GÜZ DÖNEMİ STAJ DUYURUSU.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\test-results\\2024-2025 GÜZ DÖNEMİ STAJ DUYURUSU.pdf"
+    },
+    {
+      "Identity": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\wwwroot\\test-results\\güncel CV.pdf",
+      "SourceId": "HastaneTakipsistemi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\wwwroot\\",
+      "BasePath": "_content/HastaneTakipsistemi",
+      "RelativePath": "test-results/güncel CV.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\test-results\\güncel CV.pdf"
     }
   ]
 }

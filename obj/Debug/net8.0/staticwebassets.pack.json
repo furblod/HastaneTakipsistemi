@@ -245,6 +245,14 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
+      "Id": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\wwwroot\\test-results\\2024-2025 GÜZ DÖNEMİ STAJ DUYURUSU.pdf",
+      "PackagePath": "staticwebassets\\test-results\\2024-2025 GÜZ DÖNEMİ STAJ DUYURUSU.pdf"
+    },
+    {
+      "Id": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\wwwroot\\test-results\\güncel CV.pdf",
+      "PackagePath": "staticwebassets\\test-results\\güncel CV.pdf"
+    },
+    {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.HastaneTakipsistemi.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },
