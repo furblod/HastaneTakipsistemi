@@ -186,5 +186,17 @@ namespace HastaneTakipsistemi.Controllers
 
             return RedirectToAction(nameof(PatientDetails), new { patientId = model.PatientId });
         }
+        
+        [Authorize(Roles = "Doctor")]
+        public async Task<IActionResult> ViewTestRequests(int appointmentId)
+        {
+            var testRequests = await _context.TestRequests
+                .Include(tr => tr.Patient)
+                .Where(tr => tr.AppointmentId == appointmentId)
+                .ToListAsync();
+
+            ViewBag.AppointmentId = appointmentId;
+            return View(testRequests);
+        }
     }
 }

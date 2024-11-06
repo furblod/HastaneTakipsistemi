@@ -12,11 +12,17 @@ namespace HastaneTakipsistemi.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public TestRequestController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+
+        public TestRequestController(
+            ApplicationDbContext context,
+            UserManager<ApplicationUser> userManager,
+            IWebHostEnvironment webHostEnvironment)
         {
             _context = context;
             _userManager = userManager;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         [Authorize(Roles = "Patient")]
@@ -59,7 +65,7 @@ namespace HastaneTakipsistemi.Controllers
             if (resultFile != null && resultFile.Length > 0)
             {
                 var fileName = Path.GetFileName(resultFile.FileName);
-                var filePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "test-results", fileName);
+                var filePath = Path.Combine(_webHostEnvironment.WebRootPath, "test-results", fileName);
 
                 using (var stream = new FileStream(filePath, FileMode.Create))
                 {
@@ -73,6 +79,7 @@ namespace HastaneTakipsistemi.Controllers
 
             return RedirectToAction(nameof(RequestedTests));
         }
+
         [HttpPost]
         [Authorize(Roles = "Doctor")]
         public async Task<IActionResult> Create([FromForm] TestRequest testRequest)
@@ -102,6 +109,21 @@ namespace HastaneTakipsistemi.Controllers
             }
 
             return BadRequest(); // Hatalı durum
+        }
+
+
+        //private readonly IWebHostEnvironment _webHostEnvironment;
+
+        [Authorize(Roles = "Doctor,Patient")]
+        public IActionResult ViewTestResult(string fileName)
+        {
+            var filePath = Path.Combine(_webHostEnvironment.WebRootPath, "test-results", fileName);
+            if (!System.IO.File.Exists(filePath))
+            {
+                return NotFound();
+            }
+            var fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read);
+            return File(fileStream, "application/pdf", fileName);
         }
     }
 }

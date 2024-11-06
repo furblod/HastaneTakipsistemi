@@ -45,6 +45,8 @@
                             onclick="openTestRequestModal(@appointment.Id)">
                             Tahlil İste
                         </button>
+                        <a asp-action="ViewTestRequests" asp-route-appointmentId="@appointment.Id"
+                            class="btn btn-info">Tahlilleri Görüntüle</a>
                     </div>
                 </td>
             </tr>

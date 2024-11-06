@@ -1,0 +1,37 @@
+@model List<TestRequest>
+
+<h2>Tahlil İstekleri</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Test Türü</th>
+            <th>Durum</th>
+            <th>Notlar</th>
+            <th>Sonuç</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var testRequest in Model)
+        {
+            <tr>
+                <td>@testRequest.TestType</td>
+                <td>@testRequest.Status</td>
+                <td>@testRequest.Notes</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(testRequest.ResultFile))
+                    {
+                        <a href="@Url.Action("ViewTestResult", "TestRequest", new { fileName = testRequest.ResultFile })"
+                            target="_blank">Sonucu Görüntüle</a>
+                    }
+                    else
+                    {
+                        <span>Henüz sonuç yok</span>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<a href="@Url.Action("DoctorAppointments", "Appointment")" class="btn btn-secondary">Geri Dön</a>
