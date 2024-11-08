@@ -7,44 +7,50 @@ using Microsoft.AspNetCore.Mvc;
 public class PrescriptionController : Controller
 {
     private readonly ApplicationDbContext _context;
-    private readonly UserManager<ApplicationUser > _userManager;
+    private readonly UserManager<ApplicationUser> _userManager;
 
-    public PrescriptionController(ApplicationDbContext context, UserManager<ApplicationUser > userManager)
+    public PrescriptionController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
     {
         _context = context;
         _userManager = userManager;
     }
 
-    [HttpGet]
-    public async Task<IActionResult> Create(int appointmentId)
+    [Authorize(Roles = "Doctor")]
+    public IActionResult Create(int appointmentId)
     {
-        var appointment = await _context.Appointments.FindAsync(appointmentId);
-        if (appointment == null || appointment.DoctorId != _userManager.GetUserId(User))
-        {
-            return NotFound();
-        }
-
-        var model = new Prescription
-        {
-            AppointmentId = appointmentId,
-            DoctorId = _userManager.GetUserId(User),
-            PatientId = appointment.PatientId,
-            CreatedDate = DateTime.Now
-        };
-
-        return View(model);
+        ViewBag.AppointmentId = appointmentId;
+        return View();
     }
 
     [HttpPost]
-    public async Task<IActionResult> Create(Prescription prescription)
+    [Authorize(Roles = "Doctor")]
+    public async Task<IActionResult> Create(Prescription prescription, int appointmentId)
     {
         if (ModelState.IsValid)
         {
+            // Randevuyu al
+            var appointment = await _context.Appointments.FindAsync(appointmentId);
+            if (appointment == null)
+            {
+                return NotFound();
+            }
+
+            // Doktorun kendi ID'sini al
+            prescription.DoctorId = _userManager.GetUserId(User);
+
+            // Hastanın ID'sini randevudan al
+            prescription.PatientId = appointment.PatientId;
+
+            // Reçete tarihini ayarla
+            prescription.CreatedDate = DateTime.Now;
+
             _context.Prescriptions.Add(prescription);
             await _context.SaveChangesAsync();
-            return RedirectToAction("DoctorAppointments");
+
+            return RedirectToAction("DoctorAppointments", "Appointment");
         }
 
+        // Hata durumunda view'a geri dön
         return View(prescription);
     }
 }

@@ -3,7 +3,7 @@
 <h2>Reçete Oluştur</h2>
 
 <form asp-action="Create">
-    <input type="hidden" asp-for="AppointmentId" />
+    <input type="hidden" asp-for="AppointmentId" name="appointmentId" value="@ViewBag.AppointmentId" />
     <div>
         <label>İlaçlar:</label>
         <textarea asp-for="Medications"></textarea>
