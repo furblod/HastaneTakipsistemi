@@ -1,0 +1,20 @@
+@model HastaneTakipsistemi.Models.Prescription
+
+<h2>Reçete Oluştur</h2>
+
+<form asp-action="Create">
+    <input type="hidden" asp-for="AppointmentId" />
+    <div>
+        <label>İlaçlar:</label>
+        <textarea asp-for="Medications"></textarea>
+    </div>
+    <div>
+        <label>Kullanım:</label>
+        <textarea asp-for="Usage"></textarea>
+    </div>
+    <div>
+        <label>Notlar:</label>
+        <textarea asp-for="Notes"></textarea>
+    </div>
+    <button type="submit">Reçeteyi Kaydet</button>
+</form>

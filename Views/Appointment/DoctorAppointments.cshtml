@@ -47,6 +47,8 @@
                         </button>
                         <a asp-action="ViewTestRequests" asp-route-appointmentId="@appointment.Id"
                             class="btn btn-info">Tahlilleri Görüntüle</a>
+                        <a asp-controller="Prescription" asp-action="Create"
+                            asp-route-appointmentId="@appointment.Id">Reçete Oluştur</a>
                     </div>
                 </td>
             </tr>
@@ -82,7 +84,7 @@
                         <label for="notes">Notlar</label>
                         <textarea id="notes" name="notes" class="form-control"></textarea>
                     </div>
-                   
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">İptal</button>

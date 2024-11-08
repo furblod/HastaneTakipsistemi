@@ -1,0 +1,25 @@
+@model IEnumerable<HastaneTakipsistemi.Models.Prescription>
+
+<h2>Reçetelerim</h2>
+
+<table>
+    <thead>
+        <tr>
+            <th>Randevu Tarihi</th>
+            <th>İlaçlar</th>
+            <th>Kullanım</th>
+            <th>Notlar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var prescription in Model)
+        {
+            <tr>
+                <td>@prescription.Appointment?.AppointmentDate</td>
+                <td>@prescription.Medications</td>
+                <td>@prescription.Usage</td>
+                <td>@prescription.Notes</td>
+            </tr>
+        }
+    </tbody>
+</table>
