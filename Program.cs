@@ -70,13 +70,17 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+// app.MapControllerRoute(
+//     name: "default",
+//     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+// app.MapControllerRoute(
+//     name: "patient",
+//     pattern: "{controller=Patient}/{action=Profile}/{id?}");
 
 app.MapControllerRoute(
-    name: "patient",
-    pattern: "{controller=Patient}/{action=Profile}/{id?}");
+    name: "default",
+    pattern: "{controller=Home}/{action=Welcome}/{id?}");
 app.MapRazorPages();
 
 app.Run();

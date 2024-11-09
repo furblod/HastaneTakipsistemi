@@ -6,7 +6,8 @@ using Microsoft.AspNetCore.Identity;
 
 namespace HastaneTakipsistemi.Controllers
 {
-    [Authorize(Roles = "Admin,Doctor,Patient")]
+    [AllowAnonymous]
+    //[Authorize(Roles = "Admin,Doctor,Patient")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -17,27 +18,32 @@ namespace HastaneTakipsistemi.Controllers
             _logger = logger;
             _userManager = userManager;
         }
-
-        // public IActionResult Index()
-        // {
-        //     return View();
-        // }
-        public async Task<IActionResult> Index()
+        [AllowAnonymous]
+        public IActionResult Welcome()
         {
-            var user = await _userManager.GetUserAsync(User);
-            if (user != null && await _userManager.IsInRoleAsync(user, "Patient"))
+            // Eğer kullanıcı giriş yapmışsa rolüne göre yönlendir
+            if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Profile", "Patient");
+                if (User.IsInRole("Patient"))
+                {
+                    return RedirectToAction("Profile", "Patient");
+                }
+                else if (User.IsInRole("Doctor"))
+                {
+                    return RedirectToAction("DoctorAppointments", "Appointment");
+                }
+                else if (User.IsInRole("Admin"))
+                {
+                    return RedirectToAction("Index", "Admin");
+                }
             }
-            else if (user != null && await _userManager.IsInRoleAsync(user, "Doctor"))
-            {
-                return RedirectToAction("DoctorAppointments", "Appointment");
-            }
-            else if (user != null && await _userManager.IsInRoleAsync(user, "Admin"))
-            {
-                return RedirectToAction("Index", "Admin");
-            }
+
             return View();
+        }
+
+        public IActionResult Index()
+        {
+            return RedirectToAction("Welcome");
         }
 
         public IActionResult Privacy()

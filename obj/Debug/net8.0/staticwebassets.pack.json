@@ -13,6 +13,18 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\wwwroot\\images\\hospital-exterior.jpg",
+      "PackagePath": "staticwebassets\\images\\hospital-exterior.jpg"
+    },
+    {
+      "Id": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\wwwroot\\images\\hospital-interior.jpg",
+      "PackagePath": "staticwebassets\\images\\hospital-interior.jpg"
+    },
+    {
+      "Id": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\wwwroot\\images\\medical-team.jpg",
+      "PackagePath": "staticwebassets\\images\\medical-team.jpg"
+    },
+    {
       "Id": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
