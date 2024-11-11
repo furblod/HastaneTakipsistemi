@@ -4,37 +4,23 @@
     ViewData["Title"] = "Hasta Profili";
 }
 
-<h2>@ViewData["Title"]</h2>
-
-<div>
-    <h4>Kişisel Bilgiler</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-3">Ad:</dt>
-        <dd class="col-sm-9">@Model.FirstName</dd>
-
-        <dt class="col-sm-3">Soyad:</dt>
-        <dd class="col-sm-9">@Model.LastName</dd>
-
-        <dt class="col-sm-3">E-posta:</dt>
-        <dd class="col-sm-9">@Model.Email</dd>
-
-        <dt class="col-sm-3">Yaş:</dt>
-        <dd class="col-sm-9">@Model.Age</dd>
-
-        <dt class="col-sm-3">Cinsiyet:</dt>
-        <dd class="col-sm-9">@Model.Gender</dd>
-
-        <dt class="col-sm-3">Tıbbi Geçmiş:</dt>
-        <dd class="col-sm-9">@Model.MedicalHistory</dd>
-
-        <dt class="col-sm-3">Kan Gurubu:</dt>
-        <dd class="col-sm-9">@Model.BloodType</dd>
-
-        <dt class="col-sm-3">Alerjiler:</dt>
-        <dd class="col-sm-9">@Model.Allergies</dd>
-
-        <dt class="col-sm-3">Kronik Hastalık:</dt>
-        <dd class="col-sm-9">@Model.ChronicDiseases</dd>
-    </dl>
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card text-center">
+                <div class="card-header">
+                    <h2>@Model.FirstName @Model.LastName</h2>
+                </div>
+                <div class="card-body">
+                    <p class="card-text"><strong>Email:</strong> @Model.Email</p>
+                    <p class="card-text"><strong>Yaş:</strong> @Model.Age</p>
+                    <p class="card-text"><strong>Cinsiyet:</strong> @Model.Gender</p>
+                    <p class="card-text"><strong>Kan Grubu:</strong> @Model.BloodType</p>
+                    <p class="card-text"><strong>Alerjiler:</strong> @Model.Allergies</p>
+                    <p class="card-text"><strong>Kronik Hastalıklar:</strong> @Model.ChronicDiseases</p>
+                    <p class="card-text"><strong>Tıbbi Geçmiş:</strong> @Model.MedicalHistory</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

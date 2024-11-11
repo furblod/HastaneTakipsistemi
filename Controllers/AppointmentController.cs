@@ -162,7 +162,7 @@ namespace HastaneTakipsistemi.Controllers
             return RedirectToAction(nameof(DoctorAppointments));
         }
 
-        [Authorize(Roles = "Doctor")]
+        [Authorize(Roles = "Doctor,Patient")]
         public async Task<IActionResult> PatientDetails(string patientId)
         {
             var patient = await _userManager.FindByIdAsync(patientId);
