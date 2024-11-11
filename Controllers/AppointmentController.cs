@@ -52,6 +52,40 @@ namespace HastaneTakipsistemi.Controllers
         [Authorize(Roles = "Patient")]
         public async Task<IActionResult> Create(Appointment appointment, string Specialization)
         {
+            // Önce mevcut randevuların çakışıp çakışmadığını kontrol et
+            var existingAppointments = await _context.Appointments
+                .Where(a => a.DoctorId == appointment.DoctorId &&
+                            a.AppointmentDate == appointment.AppointmentDate)
+                .ToListAsync();
+
+            if (existingAppointments.Any())
+            {
+                ModelState.AddModelError("", "Seçtiğiniz tarih ve saatte doktor zaten bir randevu almıştır.");
+
+                // Hata durumunda dropdown'ları tekrar doldur
+                var special = new List<string> { "Dahiliye", "Kardiyoloji", "Nöroloji", "Ortopedi", "Pediatri", "Psikiyatri" };
+                ViewBag.Specializations = new SelectList(special);
+
+                // Eğer bir uzmanlık seçildiyse, o uzmanlıktaki doktorları da tekrar getir
+                if (!string.IsNullOrEmpty(Specialization))
+                {
+                    var doctors = await _userManager.GetUsersInRoleAsync("Doctor");
+                    var doctorsInSpecialization = doctors
+                        .Where(d => d.Specialization == Specialization)
+                        .Select(d => new SelectListItem
+                        {
+                            Value = d.Id,
+                            Text = $"Dr. {d.FirstName} {d.LastName}"
+                        })
+                        .ToList();
+
+                    ViewBag.Doctors = new SelectList(doctorsInSpecialization, "Value", "Text");
+                }
+
+                return View(appointment);
+            }
+
+            // Mevcut Create metodu devam eder...
             if (ModelState.IsValid)
             {
                 appointment.PatientId = _userManager.GetUserId(User);
@@ -61,18 +95,6 @@ namespace HastaneTakipsistemi.Controllers
                 if (doctor == null || doctor.Specialization != Specialization)
                 {
                     ModelState.AddModelError("DoctorId", "Geçersiz doktor seçimi.");
-                    return View(appointment);
-                }
-
-                // Seçilen tarih ve saatte başka bir randevu olup olmadığını kontrol et
-                var existingAppointment = await _context.Appointments
-                    .AnyAsync(a => a.DoctorId == appointment.DoctorId &&
-                                   a.AppointmentDate == appointment.AppointmentDate);
-
-                if (existingAppointment)
-                {
-                    ModelState.AddModelError("", "Seçtiğiniz tarih ve saatte doktor zaten bir randevu almıştır.");
-                    var specialization = new List<string> { "Dahiliye", "Kardiyoloji", "Nöroloji", "Ortopedi", "Pediatri", "Psikiyatri" };
                     return View(appointment);
                 }
 
