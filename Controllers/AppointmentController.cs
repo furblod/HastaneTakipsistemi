@@ -21,7 +21,7 @@ namespace HastaneTakipsistemi.Controllers
             _userManager = userManager;
         }
 
-        // Hasta için randevu oluşturma sayfası
+        //Hasta için randevu oluşturma sayfası
         [Authorize(Roles = "Patient")]
         public async Task<IActionResult> Create()
         {
@@ -61,6 +61,18 @@ namespace HastaneTakipsistemi.Controllers
                 if (doctor == null || doctor.Specialization != Specialization)
                 {
                     ModelState.AddModelError("DoctorId", "Geçersiz doktor seçimi.");
+                    return View(appointment);
+                }
+
+                // Seçilen tarih ve saatte başka bir randevu olup olmadığını kontrol et
+                var existingAppointment = await _context.Appointments
+                    .AnyAsync(a => a.DoctorId == appointment.DoctorId &&
+                                   a.AppointmentDate == appointment.AppointmentDate);
+
+                if (existingAppointment)
+                {
+                    ModelState.AddModelError("", "Seçtiğiniz tarih ve saatte doktor zaten bir randevu almıştır.");
+                    var specialization = new List<string> { "Dahiliye", "Kardiyoloji", "Nöroloji", "Ortopedi", "Pediatri", "Psikiyatri" };
                     return View(appointment);
                 }
 
@@ -186,7 +198,7 @@ namespace HastaneTakipsistemi.Controllers
 
             return RedirectToAction(nameof(PatientDetails), new { patientId = model.PatientId });
         }
-        
+
         [Authorize(Roles = "Doctor")]
         public async Task<IActionResult> ViewTestRequests(int appointmentId)
         {

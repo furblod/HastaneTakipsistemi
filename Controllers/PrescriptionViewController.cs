@@ -14,12 +14,12 @@ public class PrescriptionViewController : Controller
         _context = context;
     }
 
-    public async Task<IActionResult> MyPrescriptions()
+    public async Task<IActionResult> MyPrescriptions(int appointmentId)
     {
         var patientId = User.FindFirstValue(ClaimTypes.NameIdentifier);
         var prescriptions = await _context.Prescriptions
             .Include(p => p.Appointment) // Randevuyu önceden yükle
-            .Where(p => p.PatientId == patientId)
+            .Where(p => p.PatientId == patientId && p.AppointmentId == appointmentId) // Sadece ilgili randevuya ait reçeteleri al
             .ToListAsync();
 
         return View(prescriptions);

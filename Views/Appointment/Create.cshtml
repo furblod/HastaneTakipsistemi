@@ -2,6 +2,16 @@
 
 <h2>Randevu Oluştur</h2>
 
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="alert alert-danger">
+        @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+        {
+            <p>@error.ErrorMessage</p>
+        }
+    </div>
+}
+
 <form asp-action="Create">
 
     <div class="form-group">
@@ -13,7 +23,7 @@
 
     <div class="form-group">
         <label asp-for="DoctorId">Doktor</label>
-        <select asp-for="DoctorId" class="form-control" disabled>
+        <select asp-for="DoctorId" class="form-control" asp-items="ViewBag.Doctors" disabled >
             <option value="">Önce Uzmanlık Alanı Seçiniz</option>
         </select>
         <span asp-validation-for="DoctorId" class="text-danger"></span>
