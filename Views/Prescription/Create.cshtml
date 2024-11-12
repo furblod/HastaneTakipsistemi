@@ -1,20 +1,75 @@
 @model HastaneTakipsistemi.Models.Prescription
 
-<h2>Reçete Oluştur</h2>
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+            <div class="card shadow-lg border-0 rounded-4">
+                <div class="card-header bg-primary text-white py-3">
+                    <h4 class="mb-0 text-center">
+                        <i class="fas fa-prescription me-2"></i>Reçete Oluştur
+                    </h4>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Create" method="post">
+                        <input type="hidden" asp-for="AppointmentId" value="@ViewBag.AppointmentId" />
 
-<form asp-action="Create">
-    <input type="hidden" asp-for="AppointmentId" name="appointmentId" value="@ViewBag.AppointmentId" />
-    <div>
-        <label>İlaçlar:</label>
-        <textarea asp-for="Medications"></textarea>
+                        <div class="mb-3">
+                            <label asp-for="Medications" class="form-label">
+                                <i class="fas fa-pills me-2 text-primary"></i>İlaçlar
+                            </label>
+                            <textarea asp-for="Medications" class="form-control" rows="3" required></textarea>
+                            <span asp-validation-for="Medications" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Usage" class="form-label">
+                                <i class="fas fa-notes-medical me-2 text-success"></i>Kullanım Talimatları
+                            </label>
+                            <textarea asp-for="Usage" class="form-control" rows="3" required></textarea>
+                            <span asp-validation-for="Usage" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Notes" class="form-label">
+                                <i class="fas fa-comment-medical me-2 text-info"></i>Ek Notlar
+                            </label>
+                            <textarea asp-for="Notes" class="form-control" rows="3"></textarea>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary rounded-3 py-2">
+                                <i class="fas fa-save me-2"></i>Reçeteyi Kaydet
+                            </button>
+                            <a asp-action="DoctorAppointments" asp-controller="Appointment"
+                                class="btn btn-outline-secondary rounded-3 py-2">
+                                <i class="fas fa-times me-2"></i>İptal
+                            </a>
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-muted text-center py-2">
+                    <small>
+                        <i class="fas fa-info-circle me-2"></i>Lütfen reçeteyi dikkatle ve açık bir şekilde doldurunuz.
+                    </small>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        <label>Kullanım:</label>
-        <textarea asp-for="Usage"></textarea>
-    </div>
-    <div>
-        <label>Notlar:</label>
-        <textarea asp-for="Notes"></textarea>
-    </div>
-    <button type="submit">Reçeteyi Kaydet</button>
-</form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+            // Form submit öncesi validasyon
+            $('form').on('submit', function () {
+                if ($(this).valid()) {
+                    // Loading butonu ekleyebilirsiniz
+                    $(this).find('button[type="submit"]')
+                        .html('<span class="spinner-border spinner-border-sm me-2"></span>Kaydediliyor...')
+                        .prop('disabled', true);
+                }
+            });
+        });
+    </script>
+}

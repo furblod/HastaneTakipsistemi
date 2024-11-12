@@ -105,6 +105,7 @@
                                     <tr>
                                         <th>Hasta Adı</th>
                                         <th>Tarih</th>
+                                        <th>Randevu Notu</th>
                                         <th>Durum</th>
                                         <th>İşlemler</th>
                                     </tr>
@@ -122,6 +123,10 @@
                                             <td>
                                                 <i class="fas fa-calendar-alt me-1 text-muted"></i>
                                                 @appointment.AppointmentDate.ToString("dd MMMM yyyy HH:mm")
+                                            </td>
+                                            <td>
+                                                <i class="fa-regular fa-note-sticky"></i>
+                                                @appointment.Notes
                                             </td>
                                             <td>
                                                 @switch (appointment.Status)
@@ -150,7 +155,7 @@
                                                     </button>
 
                                                     <!-- Tahlilleri Görüntüle Butonu -->
-                                                    <a asp-controller="TestRequest" asp-action="MyTestRequests"
+                                                    <a asp-controller="Appointment" asp-action="ViewTestRequests"
                                                         asp-route-appointmentId="@appointment.Id"
                                                         class="btn btn-sm btn-primary rounded-2">
                                                         <i class="fas fa-file-medical"></i> Tahlilleri Görüntüle
