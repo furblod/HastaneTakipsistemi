@@ -24,35 +24,3 @@ html {
 body {
   margin-bottom: 60px;
 }
-
-.welcome-container {
-  background-color: #f4f6f9;
-}
-
-.carousel-item img {
-  max-height: 500px;
-  object-fit: cover;
-}
-
-.card {
-  transition: transform 0.3s;
-  height: 100%;
-}
-
-.card-body {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-.card:hover {
-  transform: scale(1.05);
-}
-
-.btn {
-  margin-top: auto;
-}
-
-.text {
-  color: rgb(24, 15, 15);
-}
