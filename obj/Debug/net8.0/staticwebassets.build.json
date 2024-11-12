@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "hwEdien3hzZt9K9mA8M0vVioz2ulnWRfG9+MxVOUXnw=",
+  "Hash": "rK3PwjwOdZMKUnmYgKrcpif0AYhtD3D5Ronoe/B+NFc=",
   "Source": "HastaneTakipsistemi",
   "BasePath": "_content/HastaneTakipsistemi",
   "Mode": "Default",
@@ -1195,6 +1195,25 @@
       "OriginalItemSpec": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\HastaneTakipsistemi.bundle.scp.css"
     },
     {
+      "Identity": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\wwwroot\\css\\login.css",
+      "SourceId": "HastaneTakipsistemi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\wwwroot\\",
+      "BasePath": "_content/HastaneTakipsistemi",
+      "RelativePath": "css/login.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\login.css"
+    },
+    {
       "Identity": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\wwwroot\\css\\navbar.css",
       "SourceId": "HastaneTakipsistemi",
       "SourceType": "Discovered",
@@ -1214,6 +1233,25 @@
       "OriginalItemSpec": "wwwroot\\css\\navbar.css"
     },
     {
+      "Identity": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\wwwroot\\css\\register.css",
+      "SourceId": "HastaneTakipsistemi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\wwwroot\\",
+      "BasePath": "_content/HastaneTakipsistemi",
+      "RelativePath": "css/register.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\register.css"
+    },
+    {
       "Identity": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\wwwroot\\css\\site.css",
       "SourceId": "HastaneTakipsistemi",
       "SourceType": "Discovered",
@@ -1231,6 +1269,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
+    },
+    {
+      "Identity": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\wwwroot\\css\\welcome.css",
+      "SourceId": "HastaneTakipsistemi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\wwwroot\\",
+      "BasePath": "_content/HastaneTakipsistemi",
+      "RelativePath": "css/welcome.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\welcome.css"
     },
     {
       "Identity": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\wwwroot\\favicon.ico",

@@ -5,12 +5,24 @@
       "PackagePath": "staticwebassets\\HastaneTakipsistemi.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\wwwroot\\css\\login.css",
+      "PackagePath": "staticwebassets\\css\\login.css"
+    },
+    {
       "Id": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\wwwroot\\css\\navbar.css",
       "PackagePath": "staticwebassets\\css\\navbar.css"
     },
     {
+      "Id": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\wwwroot\\css\\register.css",
+      "PackagePath": "staticwebassets\\css\\register.css"
+    },
+    {
       "Id": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
+    },
+    {
+      "Id": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\wwwroot\\css\\welcome.css",
+      "PackagePath": "staticwebassets\\css\\welcome.css"
     },
     {
       "Id": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\wwwroot\\favicon.ico",

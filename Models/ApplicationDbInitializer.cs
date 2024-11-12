@@ -16,7 +16,7 @@ namespace HastaneTakipsistemi.Models
 
                 if (roleManager != null && userManager != null)
                 {
-                    // Rolleri ekleyin
+                    // Roller
                     if (!roleManager.RoleExistsAsync("Admin").Result)
                     {
                         roleManager.CreateAsync(new IdentityRole("Admin")).Wait();
@@ -30,7 +30,7 @@ namespace HastaneTakipsistemi.Models
                         roleManager.CreateAsync(new IdentityRole("Patient")).Wait();
                     }
 
-                    // Admin kullanıcı ekleyin
+                    // Admin
                     var adminUser = userManager.FindByEmailAsync("admin@domain.com").Result;
                     if (adminUser == null)
                     {

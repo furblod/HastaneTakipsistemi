@@ -4,31 +4,22 @@
     ViewData["Title"] = "Giriş Yap";
 }
 
-<h1>@ViewData["Title"]</h1>
-
-<div class="row">
-    <div class="col-md-6">
-        <section>
-            <form method="post">
-                <h4>Hesabınızla Giriş Yapın</h4>
-                <hr />
-                <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Input.Email"></label>
-                    <input asp-for="Input.Email" class="form-control" />
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Input.Password"></label>
-                    <input asp-for="Input.Password" class="form-control" />
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <input asp-for="Input.RememberMe" />
-                    <label asp-for="Input.RememberMe"></label>
-                </div>
-                <button type="submit" class="btn btn-primary">Giriş Yap</button>
-            </form>
-        </section>
-    </div>
+<link rel="stylesheet" href="~/css/login.css">
+<div class="login-container login">
+    <form method="post">
+        <h4>Hesabınızla Giriş Yapın</h4>
+        <hr />
+        <div asp-validation-summary="All" class="text-danger"></div>
+        <div class="form-group">
+            <label asp-for="Input.Email"></label>
+            <input asp-for="Input.Email" class="form-control" placeholder="Email adresinizi girin" />
+            <span asp-validation-for="Input.Email" class="text-danger"></span>
+        </div>
+        <div class="form-group mb-3">
+            <label asp-for="Input.Password">Şifre</label>
+            <input asp-for="Input.Password" class="form-control" placeholder="Şifrenizi girin" type="password" />
+            <span asp-validation-for="Input.Password" class="text-danger"></span>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Giriş Yap</button>
+    </form>
 </div>
