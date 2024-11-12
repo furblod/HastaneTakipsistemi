@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "Bp+RNrJxH1xKTgF17IvkDNX3/jVTielwRM1fq1AyI2k=",
+  "Hash": "hwEdien3hzZt9K9mA8M0vVioz2ulnWRfG9+MxVOUXnw=",
   "Source": "HastaneTakipsistemi",
   "BasePath": "_content/HastaneTakipsistemi",
   "Mode": "Default",
@@ -1193,6 +1193,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\HastaneTakipsistemi.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\wwwroot\\css\\navbar.css",
+      "SourceId": "HastaneTakipsistemi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\wwwroot\\",
+      "BasePath": "_content/HastaneTakipsistemi",
+      "RelativePath": "css/navbar.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\navbar.css"
     },
     {
       "Identity": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\wwwroot\\css\\site.css",
