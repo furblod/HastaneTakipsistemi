@@ -1,38 +1,50 @@
 <!-- Views/Appointment/MyAppointments.cshtml -->
 @model IEnumerable<HastaneTakipsistemi.Models.Appointment>
+<div class="container-fluid px-4">
+    <div class="row my-4">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+                    <h3 class="mb-0">
+                        <i class="fas fa-calendar-check me-2"></i>Randevularım
+                    </h3>
+                    <span class="badge bg-light text-dark">Toplam: @Model.Count() Randevu</span>
 
-<h2>Randevularım</h2>
+                </div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Doktor</th>
+                            <th>Tarih</th>
+                            <th>Durum</th>
+                            <th>Notlar</th>
+                            <th>Tahlil Sonuçları</th>
+                            <th>Reçete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var appointment in Model)
+                        {
+                            <tr>
+                                <td>@appointment.Doctor?.FirstName @appointment.Doctor?.LastName</td>
+                                <td>@appointment.AppointmentDate.ToString("dd/MM/yyyy HH:mm")</td>
+                                <td>@appointment.Status</td>
+                                <td>@appointment.Notes</td>
+                                <td>
+                                    <a asp-controller="TestRequest" asp-action="MyTestRequests"
+                                        asp-route-appointmentId="@appointment.Id" class="btn btn-secondary btn-sm">Tahlil
+                                        Sonuçları</a>
+                                </td>
+                                <td>
+                                    <a asp-controller="PrescriptionView" asp-action="MyPrescriptions"
+                                        asp-route-appointmentId="@appointment.Id" class="btn btn-primary btn-sm">Reçeteyi
+                                        Görüntüle</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>Doktor</th>
-            <th>Tarih</th>
-            <th>Durum</th>
-            <th>Notlar</th>
-            <th>Tahlil Sonuçları</th>
-            <th>Reçete</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var appointment in Model)
-        {
-            <tr>
-                <td>@appointment.Doctor?.FirstName @appointment.Doctor?.LastName</td>
-                <td>@appointment.AppointmentDate.ToString("dd/MM/yyyy HH:mm")</td>
-                <td>@appointment.Status</td>
-                <td>@appointment.Notes</td>
-                <td>
-                    <a asp-controller="TestRequest" asp-action="MyTestRequests" asp-route-appointmentId="@appointment.Id"
-                        class="btn btn-secondary btn-sm">Tahlil Sonuçları</a>
-                </td>
-                <td>
-                    <a asp-controller="PrescriptionView" asp-action="MyPrescriptions"
-                        asp-route-appointmentId="@appointment.Id">Reçeteyi Görüntüle</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-
-<a asp-action="Create" class="btn btn-primary">Yeni Randevu Oluştur</a>
+            </div>
+        </div>
+    </div>

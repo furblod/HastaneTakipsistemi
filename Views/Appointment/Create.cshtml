@@ -1,6 +1,5 @@
 @model HastaneTakipsistemi.Models.Appointment
-
-<h2>Randevu Oluştur</h2>
+<link rel="stylesheet" href="~/css/appointmentCreate.css">
 
 @if (!ViewData.ModelState.IsValid)
 {
@@ -12,35 +11,47 @@
     </div>
 }
 
-<form asp-action="Create">
+<div class="container-fluid px-4 firs">
+    <div class="row my-4">
+        <div class="col-12">
+            <div class="card shadow-sm">
+                <h2 class="mb-4 text-center">Randevu Oluştur</h2>
 
-    <div class="form-group">
-        <label for="Specialization">Uzmanlık Alanı</label>
-        <select id="Specialization" name="Specialization" class="form-control" asp-items="ViewBag.Specializations">
-            <option value="">Uzmanlık Alanı Seçiniz</option>
-        </select>
+                <form asp-action="Create " class="m-2">
+
+                    <div class="form-group">
+                        <label for="Specialization">Uzmanlık Alanı</label>
+                        <select id="Specialization" name="Specialization" class="form-control"
+                            asp-items="ViewBag.Specializations">
+                            <option value="">Uzmanlık Alanı Seçiniz</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="DoctorId">Doktor</label>
+                        <select asp-for="DoctorId" class="form-control" asp-items="ViewBag.Doctors" disabled>
+                            <option value="">Önce Uzmanlık Alanı Seçiniz</option>
+                        </select>
+                        <span asp-validation-for="DoctorId" class="text-danger"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="AppointmentDate">Randevu Tarihi</label>
+                        <input asp-for="AppointmentDate" type="datetime-local" class="form-control" />
+                    </div>
+
+                    <div class="form-group">
+                        <label asp-for="Notes">Notlar</label>
+                        <textarea asp-for="Notes" class="form-control"></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mt-3">Randevu Oluştur</button>
+                </form>
+
+            </div>
+        </div>
     </div>
-
-    <div class="form-group">
-        <label asp-for="DoctorId">Doktor</label>
-        <select asp-for="DoctorId" class="form-control" asp-items="ViewBag.Doctors" disabled>
-            <option value="">Önce Uzmanlık Alanı Seçiniz</option>
-        </select>
-        <span asp-validation-for="DoctorId" class="text-danger"></span>
-    </div>
-
-    <div class="form-group">
-        <label asp-for="AppointmentDate">Randevu Tarihi</label>
-        <input asp-for="AppointmentDate" type="datetime-local" class="form-control" />
-    </div>
-
-    <div class="form-group">
-        <label asp-for="Notes">Notlar</label>
-        <textarea asp-for="Notes" class="form-control"></textarea>
-    </div>
-
-    <button type="submit" class="btn btn-primary mt-3">Randevu Oluştur</button>
-</form>
+</div>
 
 @section Scripts {
     <script>

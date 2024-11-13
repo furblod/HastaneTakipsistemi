@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\HastaneTakipsistemi.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\wwwroot\\css\\appointmentCreate.css",
+      "PackagePath": "staticwebassets\\css\\appointmentCreate.css"
+    },
+    {
       "Id": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\wwwroot\\css\\login.css",
       "PackagePath": "staticwebassets\\css\\login.css"
     },

@@ -49,6 +49,9 @@
                                 <li>
                                     <a class="nav-link text-dark" asp-controller="Appointment" asp-action="MyAppointments">Randevularım</a>
                                 </li>
+                                <li>
+                                    <a asp-action="Create" asp-controller="Appointment" class="nav-link text-dark">Yeni Randevu</a>
+                                </li>
                             }
                             else if (User.IsInRole("Doctor"))
                             {

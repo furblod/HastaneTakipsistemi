@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "rK3PwjwOdZMKUnmYgKrcpif0AYhtD3D5Ronoe/B+NFc=",
+  "Hash": "SYghe0dBV/9ICN250Tz6TPQ7qCEocm1/o4268ehz6u8=",
   "Source": "HastaneTakipsistemi",
   "BasePath": "_content/HastaneTakipsistemi",
   "Mode": "Default",
@@ -1193,6 +1193,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\obj\\Debug\\net8.0\\scopedcss\\projectbundle\\HastaneTakipsistemi.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\wwwroot\\css\\appointmentCreate.css",
+      "SourceId": "HastaneTakipsistemi",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\wwwroot\\",
+      "BasePath": "_content/HastaneTakipsistemi",
+      "RelativePath": "css/appointmentCreate.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\appointmentCreate.css"
     },
     {
       "Identity": "C:\\Users\\furka\\Desktop\\HastaneTakipsistemi\\wwwroot\\css\\login.css",
