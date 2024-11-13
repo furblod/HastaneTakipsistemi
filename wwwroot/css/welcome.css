@@ -29,3 +29,7 @@
 .text {
     color: rgb(24, 15, 15);
 }
+
+.carousel-caption{
+    background-color: rgba(120, 120, 120, 0.5);
+}
