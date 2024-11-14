@@ -136,7 +136,8 @@ namespace HastaneTakipsistemi.Controllers
             var userId = _userManager.GetUserId(User);
             var appointments = await _context.Appointments
                 .Include(a => a.Patient)
-                .Where(a => a.DoctorId == userId)
+                .Where(a => a.DoctorId == userId && a.Status != AppointmentStatus.Completed)
+                .OrderBy(a => a.AppointmentDate)
                 .ToListAsync();
             return View(appointments);
         }

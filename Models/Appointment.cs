@@ -24,6 +24,7 @@ namespace HastaneTakipsistemi.Models
     {
         Pending,
         Approved,
-        Cancelled
+        Cancelled,
+        Completed
     }
 }

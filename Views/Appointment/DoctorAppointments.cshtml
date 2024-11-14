@@ -140,6 +140,9 @@
                                                     case AppointmentStatus.Cancelled:
                                                         <span class="badge bg-danger">İptal Edildi</span>
                                                         break;
+                                                    case AppointmentStatus.Completed:
+                                                        <span class="badge bg-warning text-dark">Tamamlandı</span>
+                                                        break;
                                                 }
                                             </td>
                                             <td>
@@ -193,6 +196,17 @@
                                                                         <i
                                                                             class="fas fa-times-circle text-danger me-2"></i>İptal
                                                                         Et
+                                                                    </button>
+                                                                </form>
+                                                            </li>
+                                                            <li>
+                                                                <form asp-action="UpdateStatus" method="post">
+                                                                    <input type="hidden" name="id" value="@appointment.Id" />
+                                                                    <button type="submit" name="status"
+                                                                        value="@AppointmentStatus.Completed"
+                                                                        class="dropdown-item">
+                                                                        <i
+                                                                            class="fas fa-check-circle text-primary me-2"></i>Tamamla
                                                                     </button>
                                                                 </form>
                                                             </li>
