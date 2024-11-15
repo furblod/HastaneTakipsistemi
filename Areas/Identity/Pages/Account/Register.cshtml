@@ -8,6 +8,7 @@
     <h1>@ViewData["Title"]</h1>
     <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
         <hr />
+        <div asp-validation-summary="All" class="text-danger"></div>
         <div asp-validation-summary="ModelOnly" class="text-danger" role="alert"></div>
         <div class="form-floating mb-3">
             <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true"
@@ -34,23 +35,23 @@
             <label asp-for="Input.Role">Rol</label>
             <span asp-validation-for="Input.Role" class="text-danger"></span>
         </div>
+        <div class="form-floating mb-3">
+            <input asp-for="Input.Age" class="form-control" aria-required="true" />
+            <label asp-for="Input.Age">Yaş</label>
+            <span asp-validation-for="Input.Age" class="text-danger"></span>
+        </div>
+        <div class="form-floating mb-3">
+            <select asp-for="Input.Gender" class="form-control">
+                <option value="">Cinsiyet</option>
+                <option value="Male">Erkek</option>
+                <option value="Female">Kadın</option>
+            </select>
+            <label asp-for="Input.Gender"></label>
+            <span asp-validation -for="Input.Gender" class="text-danger"></span>
+        </div>
 
         @* Hasta için özel alanlar *@
         <div id="patientFields" style="display:none;">
-            <div class="form-floating mb-3">
-                <input asp-for="Input.Age" class="form-control" aria-required="true" />
-                <label asp-for="Input.Age">Yaş</label>
-                <span asp-validation-for="Input.Age" class="text-danger"></span>
-            </div>
-            <div class="form-floating mb-3">
-                <select asp-for="Input.Gender" class="form-control">
-                    <option value="">Cinsiyet</option>
-                    <option value="Male">Erkek</option>
-                    <option value="Female">Kadın</option>
-                </select>
-                <label asp-for="Input.Gender"></label>
-                <span asp-validation -for="Input.Gender" class="text-danger"></span>
-            </div>
             <div class="form-floating mb-3">
                 <textarea asp-for="Input.MedicalHistory" class="form-control" rows="4"></textarea>
                 <label asp-for="Input.MedicalHistory">Sağlık Geçmişi</label>

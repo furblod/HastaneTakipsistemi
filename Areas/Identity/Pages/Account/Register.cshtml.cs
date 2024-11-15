@@ -100,7 +100,6 @@ namespace HastaneTakipsistemi.Areas.Identity.Pages.Account
             public string ChronicDiseases { get; set; }
 
             //Doktora özel alan
-            [Required(ErrorMessage = "Lütfen uzmanlık alanınızı seçiniz.")]
             [Display(Name = "Uzmanlık Alanı")]
             public string Specialization { get; set; }
         }
