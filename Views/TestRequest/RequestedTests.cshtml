@@ -30,9 +30,9 @@
                         {
                             <tr>
                                 <td>@testRequest.Patient?.FirstName @testRequest.Patient?.LastName</td>
-                                <td>@testRequest.TestType</td>
+                                <td>@EnumHelper.GetTestTypeName(testRequest.TestType)</td>
                                 <td>@testRequest.RequestDate.ToShortDateString()</td>
-                                <td>@testRequest.Status</td>
+                                <td>@EnumHelper.GetTestStatusName(testRequest.Status)</td>
                                 <td>@testRequest.Notes</td>
                                 <td>
                                     @if (testRequest.Status == TestStatus.Requested)
