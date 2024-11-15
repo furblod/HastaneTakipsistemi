@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HastaneTakipsistemi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+692257c8ea2eea4e35e8e007f118c1dd6273860a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+41421fd05c75548b073acb71b1a6c39e0bf816f1")]
 [assembly: System.Reflection.AssemblyProductAttribute("HastaneTakipsistemi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HastaneTakipsistemi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

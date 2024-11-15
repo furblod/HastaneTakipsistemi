@@ -9,41 +9,53 @@
                         <i class="fas fa-calendar-check me-2"></i>Randevularım
                     </h3>
                     <span class="badge bg-light text-dark">Toplam Randevu: @Model.Count()</span>
-
                 </div>
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Doktor</th>
-                            <th>Tarih</th>
-                            <th>Durum</th>
-                            <th>Notlar</th>
-                            <th>Tahlil Sonuçları</th>
-                            <th>Reçete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var appointment in Model)
-                        {
-                            <tr>
-                                <td>@appointment.Doctor?.FirstName @appointment.Doctor?.LastName</td>
-                                <td>@appointment.AppointmentDate.ToString("dd/MM/yyyy HH:mm")</td>
-                                <td>@appointment.Status</td>
-                                <td>@appointment.Notes</td>
-                                <td>
-                                    <a asp-controller="TestRequest" asp-action="MyTestRequests"
-                                        asp-route-appointmentId="@appointment.Id" class="btn btn-secondary btn-sm">Tahlil
-                                        Sonuçları</a>
-                                </td>
-                                <td>
-                                    <a asp-controller="PrescriptionView" asp-action="MyPrescriptions"
-                                        asp-route-appointmentId="@appointment.Id" class="btn btn-primary btn-sm">Reçeteyi
-                                        Görüntüle</a>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+                <div class="card-body">
+                    @if (!Model.Any())
+                    {
+                        <div class="alert alert-info text-center" role="alert">
+                            <i class="fas fa-info-circle me-2"></i>Henüz hiç randevu bulunmamaktadır.
+                        </div>
+                    }
+                    else
+                    {
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Doktor</th>
+                                    <th>Tarih</th>
+                                    <th>Durum</th>
+                                    <th>Notlar</th>
+                                    <th>Tahlil Sonuçları</th>
+                                    <th>Reçete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var appointment in Model)
+                                {
+                                    <tr>
+                                        <td>@appointment.Doctor?.FirstName @appointment.Doctor?.LastName</td>
+                                        <td>@appointment.AppointmentDate.ToString("dd/MM/yyyy HH:mm")</td>
+                                        <td>@appointment.Status</td>
+                                        <td>@appointment.Notes</td>
+                                        <td>
+                                            <a asp-controller="TestRequest" asp-action="MyTestRequests"
+                                                asp-route-appointmentId="@appointment.Id"
+                                                class="btn btn-secondary btn-sm">Tahlil
+                                                Sonuçları</a>
+                                        </td>
+                                        <td>
+                                            <a asp-controller="PrescriptionView" asp-action="MyPrescriptions"
+                                                asp-route-appointmentId="@appointment.Id"
+                                                class="btn btn-primary btn-sm">Reçeteyi
+                                                Görüntüle</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                </div>
 
             </div>
         </div>
