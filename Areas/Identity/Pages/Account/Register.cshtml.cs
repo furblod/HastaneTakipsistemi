@@ -51,21 +51,21 @@ namespace HastaneTakipsistemi.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Lütfen e-posta adresinizi giriniz.")]
+            [EmailAddress(ErrorMessage = "Lütfen geçerli bir e-posta adresi giriniz.")]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Lütfen adınızı giriniz.")]
             [Display(Name = "Ad")]
             public string FirstName { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Lütfen soyadınızı giriniz.")]
             [Display(Name = "Soyad")]
             public string LastName { get; set; }
 
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage = "Lütfen şifrenizi giriniz.")]
+            [StringLength(50, ErrorMessage = "Şifreniz en az 6 karakterden oluşmalı", MinimumLength = 6)]
             [DataType(DataType.Password)]
             [Display(Name = "Şifre")]
             public string Password { get; set; }
@@ -75,19 +75,20 @@ namespace HastaneTakipsistemi.Areas.Identity.Pages.Account
             [Compare("Password", ErrorMessage = "Şifreler eşleşmiyor.")]
             public string ConfirmPassword { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Lütfen rolünüzü seçiniz")]
             [Display(Name = "Rol")]
             public string Role { get; set; }
 
-            // Patient specific fields
-            [Display(Name = "Age")]
-            [Range(0, 120, ErrorMessage = "Please enter a valid age.")]
+            // Hastaya özel alanlar
+            [Required(ErrorMessage = "Lütfen yaşınızı giriniz.")]
+            [Display(Name = "Yaş")]
+            [Range(0, 120, ErrorMessage = "Lütfen geçerli bir yaş giriniz.")]
             public int? Age { get; set; }
-
-            [Display(Name = "Gender")]
+            [Required(ErrorMessage = "Lütfen cinsiyetinizi seçiniz.")]
+            [Display(Name = "Cinsiyet")]
             public string Gender { get; set; }
 
-            [Display(Name = "Medical History")]
+            [Display(Name = "Sağlık Geçmişi")]
             public string MedicalHistory { get; set; }
             [Display(Name = "Kan Grubu")]
             public string BloodType { get; set; }
@@ -98,6 +99,8 @@ namespace HastaneTakipsistemi.Areas.Identity.Pages.Account
             [Display(Name = "Kronik Hastalıklar")]
             public string ChronicDiseases { get; set; }
 
+            //Doktora özel alan
+            [Required(ErrorMessage = "Lütfen uzmanlık alanınızı seçiniz.")]
             [Display(Name = "Uzmanlık Alanı")]
             public string Specialization { get; set; }
         }

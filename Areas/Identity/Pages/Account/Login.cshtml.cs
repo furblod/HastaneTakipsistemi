@@ -46,11 +46,11 @@ namespace HastaneTakipsistemi.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Lütfen e-mail adresinizi girniz.")]
             [EmailAddress]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Lütfen parolanızı giriniz")]
             [DataType(DataType.Password)]
             public string Password { get; set; }
 
@@ -91,12 +91,12 @@ namespace HastaneTakipsistemi.Areas.Identity.Pages.Account
                     var user = await _userManager.FindByEmailAsync(Input.Email);
                     if (await _userManager.IsInRoleAsync(user, "Patient"))
                     {
-                        // Eğer hasta ise, profil sayfasına yönlendir
+                        // Eğer hasta ise profil sayfasına yönlendir
                         return RedirectToAction("Profile", "Patient");
                     }
                     else if (await _userManager.IsInRoleAsync(user, "Doctor"))
                     {
-                        // Eğer doktor ise, randevular sayfasına yönlendir
+                        // Eğer doktor ise randevular sayfasına yönlendir
                         return RedirectToAction("DoctorAppointments", "Appointment");
                     }
                     else if (await _userManager.IsInRoleAsync(user, "Admin"))
