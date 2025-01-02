@@ -18,8 +18,8 @@ public class PrescriptionViewController : Controller
     {
         var patientId = User.FindFirstValue(ClaimTypes.NameIdentifier);
         var prescriptions = await _context.Prescriptions
-            .Include(p => p.Appointment) // Randevuyu önceden yükle
-            .Where(p => p.PatientId == patientId && p.AppointmentId == appointmentId) // Sadece ilgili randevuya ait reçeteleri al
+            .Include(p => p.Appointment)
+            .Where(p => p.PatientId == patientId && p.AppointmentId == appointmentId)
             .ToListAsync();
 
         return View(prescriptions);

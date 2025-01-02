@@ -13,7 +13,7 @@ namespace HastaneTakipsistemi.Models
         public TestType TestType { get; set; }
         public TestStatus Status { get; set; }
         public string? Notes { get; set; }
-        public string? ResultFile { get; set; } // Tahlil sonuç dosyasının yolu
+        public string? ResultFile { get; set; }
     }
 
     public enum TestType

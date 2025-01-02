@@ -106,6 +106,7 @@ namespace HastaneTakipsistemi.Controllers
 
             // Rolleri güncelle
             var currentRoles = await _userManager.GetRolesAsync(user);
+            
             var rolesToRemove = currentRoles.Except(model.Roles).ToList();
             var rolesToAdd = model.Roles.Except(currentRoles).ToList();
 

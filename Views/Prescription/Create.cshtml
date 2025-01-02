@@ -61,10 +61,8 @@
     <partial name="_ValidationScriptsPartial" />
     <script>
         $(document).ready(function () {
-            // Form submit öncesi validasyon
             $('form').on('submit', function () {
                 if ($(this).valid()) {
-                    // Loading butonu ekleyebilirsiniz
                     $(this).find('button[type="submit"]')
                         .html('<span class="spinner-border spinner-border-sm me-2"></span>Kaydediliyor...')
                         .prop('disabled', true);

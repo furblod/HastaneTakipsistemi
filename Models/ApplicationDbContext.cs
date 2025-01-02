@@ -30,7 +30,9 @@ namespace HastaneTakipsistemi.Models
                 .WithMany()
                 .HasForeignKey(a => a.DoctorId)
                 .OnDelete(DeleteBehavior.Restrict);
+
             // TestRequest için ilişkiler
+
             builder.Entity<TestRequest>()
             .HasOne(tr => tr.Doctor)
             .WithMany()
@@ -48,7 +50,9 @@ namespace HastaneTakipsistemi.Models
                 .WithMany()
                 .HasForeignKey(tr => tr.AppointmentId)
                 .OnDelete(DeleteBehavior.Restrict);
+
             // Prescription için ilişkiler
+            
             builder.Entity<Prescription>()
             .HasOne(p => p.Doctor)
             .WithMany()

@@ -36,7 +36,7 @@
                                     <tr>
                                         <td>@appointment.Doctor?.FirstName @appointment.Doctor?.LastName</td>
                                         <td>@appointment.AppointmentDate.ToString("dd/MM/yyyy HH:mm")</td>
-                                        <td>@appointment.Status</td>
+                                        <td>@EnumHelper.GetAppointmentStatusName(appointment.Status)</td>
                                         <td>@appointment.Notes</td>
                                         <td>
                                             <a asp-controller="TestRequest" asp-action="MyTestRequests"

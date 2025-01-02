@@ -28,20 +28,15 @@ public class PrescriptionController : Controller
     {
         if (ModelState.IsValid)
         {
-            // Randevuyu al
             var appointment = await _context.Appointments.FindAsync(appointmentId);
             if (appointment == null)
             {
                 return NotFound();
             }
-
-            // Doktorun kendi ID'sini al
             prescription.DoctorId = _userManager.GetUserId(User);
 
-            // Hastanın ID'sini randevudan al
             prescription.PatientId = appointment.PatientId;
 
-            // Reçete tarihini ayarla
             prescription.CreatedDate = DateTime.Now;
 
             _context.Prescriptions.Add(prescription);
@@ -49,8 +44,6 @@ public class PrescriptionController : Controller
 
             return RedirectToAction("DoctorAppointments", "Appointment");
         }
-
-        // Hata durumunda view'a geri dön
         return View(prescription);
     }
 }

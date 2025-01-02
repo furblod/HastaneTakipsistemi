@@ -20,6 +20,13 @@ public static class EnumHelper
         { TestStatus.Cancelled, "İptal Edildi" }
     };
 
+    private static readonly Dictionary<AppointmentStatus, string> AppointmentStatusNames = new Dictionary<AppointmentStatus, string>
+    {
+        { AppointmentStatus.Pending, "Beklemede" },
+        { AppointmentStatus.Completed, "Tamamlandı" },
+        { AppointmentStatus.Cancelled, "İptal Edildi" },
+        { AppointmentStatus.Approved, "Onaylandı" }
+    };
     public static string GetTestTypeName(TestType testType)
     {
         return TestTypeNames[testType];
@@ -28,5 +35,9 @@ public static class EnumHelper
     public static string GetTestStatusName(TestStatus testStatus)
     {
         return TestStatusNames[testStatus];
+    }
+    public static string GetAppointmentStatusName(AppointmentStatus appointmentStatus)
+    {
+        return AppointmentStatusNames[appointmentStatus];
     }
 }

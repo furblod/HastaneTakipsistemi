@@ -46,7 +46,7 @@ namespace HastaneTakipsistemi.Controllers
             var testRequests = await _context.TestRequests
                 .Include(tr => tr.Patient)
                 .Where(tr => tr.DoctorId == doctorId)
-                .OrderByDescending(tr => tr.RequestDate)
+                .OrderBy(tr => tr.RequestDate)
                 .ToListAsync();
 
             return View(testRequests);
@@ -86,29 +86,27 @@ namespace HastaneTakipsistemi.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Gerekli alanları doldurun
                 testRequest.RequestDate = DateTime.Now;
-                testRequest.Status = TestStatus.Requested; // Başlangıç durumu
-                testRequest.DoctorId = _userManager.GetUserId(User); // Doktorun ID'si
+                testRequest.Status = TestStatus.Requested;
+                testRequest.DoctorId = _userManager.GetUserId(User);
 
-                // Randevuya bağlı olarak hastanın ID'sini alın
+
                 var appointment = await _context.Appointments.FindAsync(testRequest.AppointmentId);
                 if (appointment != null)
                 {
-                    testRequest.PatientId = appointment.PatientId; // Hastanın ID'sini al
+                    testRequest.PatientId = appointment.PatientId;
                 }
 
-                // Test türü ve notları ayarlayın
                 testRequest.TestType = (TestType)Enum.Parse(typeof(TestType), testRequest.TestType.ToString());
                 testRequest.Notes = testRequest.Notes;
 
                 _context.TestRequests.Add(testRequest);
                 await _context.SaveChangesAsync();
 
-                return Ok(); // Başarılı yanıt
+                return Ok();
             }
 
-            return BadRequest(); // Hatalı durum
+            return BadRequest();
         }
 
 

@@ -21,7 +21,7 @@ namespace HastaneTakipsistemi.Controllers
             _userManager = userManager;
         }
 
-        //Hasta için randevu oluşturma sayfası
+
         [Authorize(Roles = "Patient")]
         public async Task<IActionResult> Create()
         {
@@ -52,7 +52,6 @@ namespace HastaneTakipsistemi.Controllers
         [Authorize(Roles = "Patient")]
         public async Task<IActionResult> Create(Appointment appointment, string Specialization)
         {
-            // Önce mevcut randevuların çakışıp çakışmadığını kontrol et
             var existingAppointments = await _context.Appointments
                 .Where(a => a.DoctorId == appointment.DoctorId &&
                             a.AppointmentDate == appointment.AppointmentDate)
@@ -62,11 +61,9 @@ namespace HastaneTakipsistemi.Controllers
             {
                 ModelState.AddModelError("", "Seçtiğiniz tarih ve saatte doktor zaten bir randevu almıştır.");
 
-                // Hata durumunda dropdown'ları tekrar doldur
                 var special = new List<string> { "Dahiliye", "Kardiyoloji", "Nöroloji", "Ortopedi", "Pediatri", "Psikiyatri" };
                 ViewBag.Specializations = new SelectList(special);
 
-                // Eğer bir uzmanlık seçildiyse, o uzmanlıktaki doktorları da tekrar getir
                 if (!string.IsNullOrEmpty(Specialization))
                 {
                     var doctors = await _userManager.GetUsersInRoleAsync("Doctor");
@@ -85,7 +82,6 @@ namespace HastaneTakipsistemi.Controllers
                 return View(appointment);
             }
 
-            // Mevcut Create metodu devam eder...
             if (ModelState.IsValid)
             {
                 appointment.PatientId = _userManager.GetUserId(User);
@@ -109,8 +105,6 @@ namespace HastaneTakipsistemi.Controllers
                     ModelState.AddModelError("", "Randevu oluşturulurken bir hata oluştu.");
                 }
             }
-
-            // Hata durumunda formun tekrar yüklenmesi için gerekli verileri hazırlayalım
             var specializations = new List<string> { "Dahiliye", "Kardiyoloji", "Nöroloji", "Ortopedi", "Pediatri", "Psikiyatri" };
             ViewBag.Specializations = new SelectList(specializations);
 
@@ -125,6 +119,7 @@ namespace HastaneTakipsistemi.Controllers
             var appointments = await _context.Appointments
                 .Include(a => a.Doctor)
                 .Where(a => a.PatientId == userId)
+                .OrderBy(a => a.AppointmentDate)
                 .ToListAsync();
             return View(appointments);
         }
